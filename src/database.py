@@ -1,5 +1,8 @@
 import pandas as pd
 
+# import wx.grid
+from datatable import DataTable
+
 
 def initDatabase(filePath: str):
     """
@@ -31,4 +34,17 @@ def initDatabase(filePath: str):
 def searchDatabase(filters: dict, database: pd.DataFrame):
     print(filters)
     print(database)
+    return
+
+
+def displayResults(database: pd.DataFrame, grid):
+    # Clear the grid
+    grid.ClearGrid()
+
+    # Display just the names of the items (col 1)
+    df = database.food
+    data = DataTable(df.to_frame())
+    grid.SetTable(data, True)
+    grid.AutoSizeColumns(True)
+    grid.HideRowLabels()  # Hide the row numbers (they take up too much space)
     return

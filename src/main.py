@@ -1,10 +1,8 @@
 import wx
 
 from gui import MyFrame3 as MyFrame
-
 from error import ErrorDialog
-
-from database import initDatabase, searchDatabase
+from database import initDatabase, searchDatabase, displayResults
 
 # Global variables
 DATABASE = None  # Global database object - Pandas.DataFrame object
