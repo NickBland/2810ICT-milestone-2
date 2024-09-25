@@ -75,27 +75,28 @@ class MyFrame3(wx.Frame):
         )
 
         # Grid
-        self.search_results_grid.CreateGrid(2, 2)
-        self.search_results_grid.EnableEditing(True)
+        self.search_results_grid.CreateGrid(2, 1)
+        self.search_results_grid.EnableEditing(False)
         self.search_results_grid.EnableGridLines(True)
         self.search_results_grid.EnableDragGridSize(False)
         self.search_results_grid.SetMargins(0, 0)
 
         # Columns
+        self.search_results_grid.SetColSize(0, 160)
         self.search_results_grid.EnableDragColMove(False)
-        self.search_results_grid.EnableDragColSize(True)
+        self.search_results_grid.EnableDragColSize(False)
         self.search_results_grid.SetColLabelAlignment(wx.ALIGN_CENTER, wx.ALIGN_CENTER)
 
         # Rows
         self.search_results_grid.AutoSizeRows()
-        self.search_results_grid.EnableDragRowSize(True)
+        self.search_results_grid.EnableDragRowSize(False)
         self.search_results_grid.SetRowLabelAlignment(wx.ALIGN_CENTER, wx.ALIGN_CENTER)
 
         # Label Appearance
 
         # Cell Defaults
         self.search_results_grid.SetDefaultCellAlignment(wx.ALIGN_LEFT, wx.ALIGN_TOP)
-        search_bSizer.Add(self.search_results_grid, 0, wx.ALL | wx.EXPAND, 5)
+        search_bSizer.Add(self.search_results_grid, 1, wx.ALL | wx.EXPAND, 5)
 
         search_right_panel = wx.BoxSizer(wx.VERTICAL)
 
@@ -359,7 +360,7 @@ class MyFrame3(wx.Frame):
             self.search_result_label, 0, wx.ALIGN_CENTER_HORIZONTAL | wx.ALL, 5
         )
 
-        self.search_result_result = wx.StaticText(
+        self.search_result_selected = wx.StaticText(
             self.search_panel,
             wx.ID_ANY,
             _("No Food Selected"),
@@ -367,10 +368,10 @@ class MyFrame3(wx.Frame):
             wx.DefaultSize,
             0,
         )
-        self.search_result_result.Wrap(-1)
+        self.search_result_selected.Wrap(-1)
 
         search_right_panel.Add(
-            self.search_result_result, 0, wx.ALL | wx.ALIGN_CENTER_HORIZONTAL, 5
+            self.search_result_selected, 0, wx.ALL | wx.ALIGN_CENTER_HORIZONTAL, 5
         )
 
         bSizer10 = wx.BoxSizer(wx.HORIZONTAL)
@@ -452,6 +453,9 @@ class MyFrame3(wx.Frame):
         self.Centre(wx.BOTH)
 
         # Connect Events
+        self.search_results_grid.Bind(
+            wx.grid.EVT_GRID_CELL_LEFT_DCLICK, self.selectFood
+        )
         self.m_button13.Bind(wx.EVT_BUTTON, self.search)
         self.m_button14.Bind(wx.EVT_BUTTON, self.resetApp)
         self.m_button15.Bind(wx.EVT_BUTTON, self.addComparison)
@@ -461,6 +465,9 @@ class MyFrame3(wx.Frame):
         pass
 
     # Virtual event handlers, override them in your derived class
+    def selectFood(self, event):
+        event.Skip()
+
     def search(self, event):
         event.Skip()
 
