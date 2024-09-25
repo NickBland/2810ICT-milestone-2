@@ -28,5 +28,7 @@ def initDatabase(filePath: str):
     return result, None
 
 
-def searchDatabase():
-    pass
+def searchDatabase(filters: dict, database: pd.DataFrame):
+    print(filters)
+    print(database)
+    return

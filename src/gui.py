@@ -272,18 +272,21 @@ class MyFrame3(wx.Frame):
 
         search_right_panel.Add(self.search_filter_nutritional_level_label, 0, wx.ALL, 5)
 
-        m_choice3Choices = []
-        self.m_choice3 = wx.Choice(
+        search_filter_level_selectionChoices = []
+        self.search_filter_level_selection = wx.Choice(
             self.search_panel,
             wx.ID_ANY,
             wx.DefaultPosition,
             wx.DefaultSize,
-            m_choice3Choices,
+            search_filter_level_selectionChoices,
             0,
         )
-        self.m_choice3.SetSelection(0)
+        self.search_filter_level_selection.SetSelection(0)
         search_right_panel.Add(
-            self.m_choice3, 0, wx.ALL | wx.ALIGN_CENTER_HORIZONTAL, 5
+            self.search_filter_level_selection,
+            0,
+            wx.ALL | wx.ALIGN_CENTER_HORIZONTAL,
+            5,
         )
 
         self.search_filter_other_label = wx.StaticText(
@@ -449,7 +452,7 @@ class MyFrame3(wx.Frame):
         self.Centre(wx.BOTH)
 
         # Connect Events
-        self.m_button13.Bind(wx.EVT_BUTTON, self.viewData)
+        self.m_button13.Bind(wx.EVT_BUTTON, self.search)
         self.m_button14.Bind(wx.EVT_BUTTON, self.resetApp)
         self.m_button15.Bind(wx.EVT_BUTTON, self.addComparison)
         self.m_button16.Bind(wx.EVT_BUTTON, self.exitApp)
@@ -458,7 +461,7 @@ class MyFrame3(wx.Frame):
         pass
 
     # Virtual event handlers, override them in your derived class
-    def viewData(self, event):
+    def search(self, event):
         event.Skip()
 
     def resetApp(self, event):
