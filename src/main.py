@@ -15,7 +15,7 @@ class MyFrame(MyFrame):
         super().__init__(None)
 
         # Initialize the database object
-        DATABASE, error = initDatabase(r"./src/Food_Nutrition_Dataset.csvAA")
+        DATABASE, error = initDatabase(r"./src/Food_Nutrition_Dataset.csv")
 
         # Workaround to show the hint text in the input boxes, as this is not an option in the WXFormBuilder app
         self.search_keyword_input.SetHint("Enter keywords")

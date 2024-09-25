@@ -19,11 +19,10 @@ def initDatabase(filePath: str):
     try:
         result = pd.read_csv(filePath)
     except Exception as e:
-        return result, e
-
-    # Check if the file is empty
-    if result.empty:
-        return result, ValueError("File is empty")
+        if str(e) == "No columns to parse from file":
+            return None, ValueError("File is empty")
+        else:
+            return result, e
 
     # Return the result
     return result, None
