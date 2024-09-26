@@ -3,7 +3,7 @@ import wx
 from gui import MyFrame3 as MyFrame
 from error import ErrorDialog
 from database import initDatabase, searchDatabase, displayResults
-from food import updateTable
+from food import updateFood
 
 # Global variables
 DATABASE = None  # Global database object - Pandas.DataFrame object
@@ -18,7 +18,7 @@ class MyFrame(MyFrame):
         # Initialise the database object
         global DATABASE  # Required to edit the global variable
         DATABASE, error = initDatabase(r"./Food_Nutrition_Dataset.csv")
-        print(DATABASE);
+        print(DATABASE)
 
         # Initialise the currently selected food to be none
         self.currently_selected_food = None
@@ -50,7 +50,6 @@ class MyFrame(MyFrame):
         results = searchDatabase(search_filters, DATABASE)
         displayResults(results, self.search_results_grid)
 
-
     def selectFood(self, event):
         """
         Adjust the currently selected food item, depending on what user has double-clicked on
@@ -77,18 +76,20 @@ class MyFrame(MyFrame):
         """
         Reset the app, (search keyword, filters etc.)
         """
-        self.search_keyword_input.SetLabel('') # Search
-        self.search_filter_nutrient_selection.SetSelection(0) # Nutrients
-        self.search_filter_range_min.SetValue('') # range min
-        self.search_filter_range_max.SetValue('') # range max 
-        self.search_filter_level_selection.SetSelection(0) # Nutrition level (Low, Mid, High)
-        self.search_filter_highProtein.SetValue(False) # High Protein Checkbox
-        self.search_filter_lowSugar.SetValue(False) # Low Sugar Checkbox
-        self.search_result_selected.SetLabel('No Food Selected') # Selected Food item
-        self.currently_selected_food = None 
+        self.search_keyword_input.SetLabel("")  # Search
+        self.search_filter_nutrient_selection.SetSelection(0)  # Nutrients
+        self.search_filter_range_min.SetValue("")  # range min
+        self.search_filter_range_max.SetValue("")  # range max
+        self.search_filter_level_selection.SetSelection(
+            0
+        )  # Nutrition level (Low, Mid, High)
+        self.search_filter_highProtein.SetValue(False)  # High Protein Checkbox
+        self.search_filter_lowSugar.SetValue(False)  # Low Sugar Checkbox
+        self.search_result_selected.SetLabel("No Food Selected")  # Selected Food item
+        self.currently_selected_food = None
 
     def updatePage(self, event):
-        updateTable(self.currently_selected_food, self)
+        updateFood(self.currently_selected_food, self)
         return
 
     def exitApp(self, event):
