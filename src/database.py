@@ -34,7 +34,14 @@ def initDatabase(filePath: str):
 def searchDatabase(filters: dict, database: pd.DataFrame):
     print(filters)
     print(database)
-    return
+
+    keyword = filters.get('keyword', '')
+
+    if keyword:
+        filtered_db = database[database['food'].str.contains(keyword, regex=False, case=False, na=False)]
+    else:
+        filtered_db = database
+    return filtered_db
 
 
 def displayResults(database: pd.DataFrame, grid):
