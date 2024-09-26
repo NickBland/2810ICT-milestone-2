@@ -206,25 +206,114 @@ class MyFrame3 ( wx.Frame ):
         self.search_panel.SetSizer( search_bSizer )
         self.search_panel.Layout()
         search_bSizer.Fit(self.search_panel)
-        self.m_notebook1.AddPage(self.search_panel, _("Search"), False)
-        self.food_panel = wx.Panel(
-            self.m_notebook1,
+        self.notebook.AddPage(self.search_panel, _("Search"), False)
+        self.food_page = wx.Panel(
+            self.notebook,
             wx.ID_ANY,
             wx.DefaultPosition,
             wx.DefaultSize,
             wx.TAB_TRAVERSAL,
         )
-        self.m_notebook1.AddPage(self.food_panel, _("Food"), False)
-        self.comparison_panel = wx.Panel(
-            self.m_notebook1,
-            wx.ID_ANY,
-            wx.DefaultPosition,
-            wx.DefaultSize,
-            wx.TAB_TRAVERSAL,
-        )
-        self.m_notebook1.AddPage(self.comparison_panel, _("Comparison"), False)
+        food_information_sizer = wx.BoxSizer(wx.VERTICAL)
 
-        bSizer3.Add(self.m_notebook1, 1, wx.EXPAND | wx.ALL, 5)
+        self.food_selected_label = wx.StaticText(
+            self.food_page,
+            wx.ID_ANY,
+            _("No Food Selected"),
+            wx.DefaultPosition,
+            wx.DefaultSize,
+            0,
+        )
+        self.food_selected_label.Wrap(-1)
+
+        self.food_selected_label.SetFont(
+            wx.Font(
+                20,
+                wx.FONTFAMILY_DEFAULT,
+                wx.FONTSTYLE_NORMAL,
+                wx.FONTWEIGHT_NORMAL,
+                False,
+                wx.EmptyString,
+            )
+        )
+
+        food_information_sizer.Add(
+            self.food_selected_label, 0, wx.ALL | wx.ALIGN_CENTER_HORIZONTAL, 5
+        )
+
+        self.food_none_warning = wx.StaticText(
+            self.food_page,
+            wx.ID_ANY,
+            _("Please double click an item under 'Search' to view more information"),
+            wx.DefaultPosition,
+            wx.DefaultSize,
+            wx.ALIGN_CENTER_HORIZONTAL,
+        )
+        self.food_none_warning.Wrap(-1)
+
+        self.food_none_warning.SetFont(
+            wx.Font(
+                wx.NORMAL_FONT.GetPointSize(),
+                wx.FONTFAMILY_TELETYPE,
+                wx.FONTSTYLE_NORMAL,
+                wx.FONTWEIGHT_NORMAL,
+                False,
+                wx.EmptyString,
+            )
+        )
+
+        food_information_sizer.Add(
+            self.food_none_warning, 0, wx.ALL | wx.ALIGN_CENTER_HORIZONTAL, 5
+        )
+
+        self.food_information_grid = wx.grid.Grid(
+            self.food_page, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0
+        )
+
+        # Grid
+        self.food_information_grid.CreateGrid(5, 2)
+        self.food_information_grid.EnableEditing(False)
+        self.food_information_grid.EnableGridLines(True)
+        self.food_information_grid.EnableDragGridSize(False)
+        self.food_information_grid.SetMargins(0, 0)
+
+        # Columns
+        self.food_information_grid.EnableDragColMove(False)
+        self.food_information_grid.EnableDragColSize(True)
+        self.food_information_grid.SetColLabelAlignment(
+            wx.ALIGN_CENTER, wx.ALIGN_CENTER
+        )
+
+        # Rows
+        self.food_information_grid.EnableDragRowSize(True)
+        self.food_information_grid.SetRowLabelAlignment(
+            wx.ALIGN_CENTER, wx.ALIGN_CENTER
+        )
+
+        # Label Appearance
+
+        # Cell Defaults
+        self.food_information_grid.SetDefaultCellAlignment(wx.ALIGN_LEFT, wx.ALIGN_TOP)
+        food_information_sizer.Add(
+            self.food_information_grid, 1, wx.ALL | wx.ALIGN_CENTER_HORIZONTAL, 5
+        )
+
+        food_information_sizer.Add((0, 20), 0, wx.EXPAND, 5)
+
+        self.food_page.SetSizer(food_information_sizer)
+        self.food_page.Layout()
+        food_information_sizer.Fit(self.food_page)
+        self.notebook.AddPage(self.food_page, _("Food"), False)
+        self.comparison_page = wx.Panel(
+            self.notebook,
+            wx.ID_ANY,
+            wx.DefaultPosition,
+            wx.DefaultSize,
+            wx.TAB_TRAVERSAL,
+        )
+        self.notebook.AddPage(self.comparison_page, _("Comparison"), False)
+
+        bSizer3.Add(self.notebook, 1, wx.EXPAND | wx.ALL, 5)
 
 
         self.SetSizer( bSizer3 )
