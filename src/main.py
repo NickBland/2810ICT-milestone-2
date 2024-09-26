@@ -17,6 +17,7 @@ class MyFrame(MyFrame):
         # Initialise the database object
         global DATABASE  # Required to edit the global variable
         DATABASE, error = initDatabase(r"./Food_Nutrition_Dataset.csv")
+        print(DATABASE);
 
         # Initialise the currently selected food to be none
         self.currently_selected_food = None
@@ -37,7 +38,7 @@ class MyFrame(MyFrame):
 
         search_filters = {
             "keyword": search_keyword,
-            "nutrient": self.search_filter_nutrient_selection.GetSelection(),
+            "nutrient": self.search_filter_nutrient_selection.GetStringSelection(),
             "min": self.search_filter_range_min.GetValue(),
             "max": self.search_filter_range_max.GetValue(),
             "level": self.search_filter_level_selection.GetSelection(),
@@ -47,6 +48,7 @@ class MyFrame(MyFrame):
 
         results = searchDatabase(search_filters, DATABASE)
         displayResults(results, self.search_results_grid)
+
 
     def selectFood(self, event):
         """

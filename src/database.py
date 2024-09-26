@@ -4,6 +4,7 @@ import pandas as pd
 from datatable import DataTable
 
 
+
 def initDatabase(filePath: str):
     """
     Initialize the database object with the given file path
@@ -34,10 +35,40 @@ def initDatabase(filePath: str):
 def searchDatabase(filters: dict, database: pd.DataFrame):
     print(filters)
     print(database)
-    return
+    
+    keyword = filters.get('keyword', '')
+    nutrient = filters.get('nutrient', '')
+    min_value = filters.get('min', '')
+    max_value = filters.get('max', '')
 
+    #debug
+    # print(type(nutrient))
+    # print(nutrient)
+    
+    # Keyword Filter
+    if keyword:
+        filtered_db = database[database['food'].str.contains(keyword, regex=False, case=False, na=False)]
+    else:
+        filtered_db = database
 
-def displayResults(database: pd.DataFrame, grid):
+    # NutrientFilter
+    if nutrient and min_value and max_value:
+
+        filtered_db[nutrient] = pd.to_numeric(filtered_db[nutrient], errors='coerce')
+
+        try:
+            min_value = float(min_value)
+            max_value = float(max_value)
+        except ValueError:
+            print("Invalid min or max, using default")
+            min_value = float('-inf')
+            max_value = float('inf')
+
+        filtered_db = filtered_db[(filtered_db[nutrient] >= min_value) & (filtered_db[nutrient] <= max_value)]
+
+    return filtered_db
+        
+def displayResults(database: pd .DataFrame, grid):
     # Clear the grid
     grid.ClearGrid()
 
