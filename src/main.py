@@ -38,7 +38,7 @@ class MyFrame(MyFrame):
 
         search_filters = {
             "keyword": search_keyword,
-            "nutrient": self.search_filter_nutrient_selection.GetSelection(),
+            "nutrient": self.search_filter_nutrient_selection.GetStringSelection(),
             "min": self.search_filter_range_min.GetValue(),
             "max": self.search_filter_range_max.GetValue(),
             "level": self.search_filter_level_selection.GetSelection(),

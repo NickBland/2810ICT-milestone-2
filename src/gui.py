@@ -92,9 +92,9 @@ class MyFrame3 ( wx.Frame ):
 
         search_right_panel.Add( self.search_filter_nutrients_label, 0, wx.ALL, 5 )
 
-        search_filter_nutrient_selectionChoices = []
+        search_filter_nutrient_selectionChoices = [ _(u"Caloric Value"), _(u"Fat"), _(u"Saturated Fats"), _(u"Monounsaturated Fats"), _(u"Polyunsaturated Fats"), _(u"Carbohydrates"), _(u"Sugars"), _(u"Protein"), _(u"Dietary Fiber"), _(u"Cholesterol"), _(u"Sodium"), _(u"Water"), _(u"Vitamin A"), _(u"Vitamin B1"), _(u"Vitamin B11"), _(u"Vitamin B12"), _(u"Vitamin B2"), _(u"Vitamin B3"), _(u"Vitamin B5"), _(u"Vitamin B6"), _(u"Vitamin C"), _(u"Vitamin D"), _(u"Vitamin E"), _(u"Vitamin K"), _(u"Calcium"), _(u"Copper"), _(u"Iron"), _(u"Magnesium"), _(u"Manganese"), _(u"Phosphorus"), _(u"Potassium"), _(u"Selenium"), _(u"Zinc"), _(u"Nutrition Density") ]
         self.search_filter_nutrient_selection = wx.Choice( self.search_panel, wx.ID_ANY, wx.DefaultPosition, wx.Size( 200,-1 ), search_filter_nutrient_selectionChoices, 0 )
-        self.search_filter_nutrient_selection.SetSelection( 0 )
+        self.search_filter_nutrient_selection.SetSelection( 4 )
         search_right_panel.Add( self.search_filter_nutrient_selection, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
 
         self.search_filter_range_label = wx.StaticText( self.search_panel, wx.ID_ANY, _(u"Nutrient Range:"), wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -215,6 +215,8 @@ class MyFrame3 ( wx.Frame ):
         # Connect Events
         self.search_results_grid.Bind( wx.grid.EVT_GRID_CELL_LEFT_DCLICK, self.selectFood )
         self.search_keyword_input.Bind( wx.EVT_TEXT, self.search )
+        self.search_filter_range_min.Bind( wx.EVT_TEXT, self.search )
+        self.search_filter_range_max.Bind( wx.EVT_TEXT, self.search )
         self.m_button13.Bind( wx.EVT_BUTTON, self.search )
         self.m_button14.Bind( wx.EVT_BUTTON, self.resetApp )
         self.m_button15.Bind( wx.EVT_BUTTON, self.addComparison )
@@ -230,6 +232,8 @@ class MyFrame3 ( wx.Frame ):
 
     def search( self, event ):
         event.Skip()
+
+
 
 
     def resetApp( self, event ):
