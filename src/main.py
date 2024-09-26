@@ -72,25 +72,26 @@ class MyFrame(MyFrame):
         # Display the selected food item in the text box
         self.search_result_selected.SetLabel(selected_cell)
 
+    def resetApp(self, event):
+        """
+        Reset the app, (search keyword, filters etc.)
+        """
+        self.search_keyword_input.SetLabel('') # Search
+        self.search_filter_nutrient_selection.SetSelection(0) # Nutrients
+        self.search_filter_range_min.SetValue('') # range min
+        self.search_filter_range_max.SetValue('') # range max 
+        self.search_filter_level_selection.SetSelection(0) # Nutrition level (Low, Mid, High)
+        self.search_filter_highProtein.SetValue(False) # High Protein Checkbox
+        self.search_filter_lowSugar.SetValue(False) # Low Sugar Checkbox
+        self.search_result_selected.SetLabel('No Food Selected') # Selected Food item
+        self.currently_selected_food = None 
+
     def exitApp(self, event):
         """
         Exit the application
         """
         self.Close()
 
-    def resetApp(self, event):
-        """
-        Reset the app, (search keyword, filters etc.)
-        """
-        self.search_keyword_input.SetLabel('')
-        self.search_filter_nutrient_selection.SetSelection(0)
-        self.search_filter_range_min.SetValue('')
-        self.search_filter_range_max.SetValue('')
-        self.search_filter_level_selection.SetSelection(0)
-        self.search_filter_highProtein.SetValue(False)
-        self.search_filter_lowSugar.SetValue(False)
-        self.search_result_selected.SetLabel('No Food Selected')
-        self.currently_selected_food = None
 
 # Run the WX application
 if __name__ == "__main__":
