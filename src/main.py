@@ -3,6 +3,7 @@ import wx
 from gui import MyFrame3 as MyFrame
 from error import ErrorDialog
 from database import initDatabase, searchDatabase, displayResults
+from food import updateTable
 
 # Global variables
 DATABASE = None  # Global database object - Pandas.DataFrame object
@@ -71,6 +72,10 @@ class MyFrame(MyFrame):
 
         # Display the selected food item in the text box
         self.search_result_selected.SetLabel(selected_cell)
+
+    def updatePage(self, event):
+        updateTable(self.currently_selected_food, self)
+        return
 
     def exitApp(self, event):
         """

@@ -27,9 +27,17 @@ class MyFrame3 ( wx.Frame ):
 
         bSizer3 = wx.BoxSizer( wx.VERTICAL )
 
-        self.m_notebook1 = wx.Notebook( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
-        self.search_panel = wx.Panel( self.m_notebook1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
-        search_bSizer = wx.BoxSizer( wx.HORIZONTAL )
+        self.notebook = wx.Notebook(
+            self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0
+        )
+        self.search_panel = wx.Panel(
+            self.notebook,
+            wx.ID_ANY,
+            wx.DefaultPosition,
+            wx.DefaultSize,
+            wx.TAB_TRAVERSAL,
+        )
+        search_bSizer = wx.BoxSizer(wx.HORIZONTAL)
 
         search_left_panel = wx.BoxSizer( wx.VERTICAL )
 
@@ -197,14 +205,26 @@ class MyFrame3 ( wx.Frame ):
 
         self.search_panel.SetSizer( search_bSizer )
         self.search_panel.Layout()
-        search_bSizer.Fit( self.search_panel )
-        self.m_notebook1.AddPage( self.search_panel, _(u"Search"), False )
-        self.food_panel = wx.Panel( self.m_notebook1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
-        self.m_notebook1.AddPage( self.food_panel, _(u"Food"), False )
-        self.comparison_panel = wx.Panel( self.m_notebook1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
-        self.m_notebook1.AddPage( self.comparison_panel, _(u"Comparison"), False )
+        search_bSizer.Fit(self.search_panel)
+        self.m_notebook1.AddPage(self.search_panel, _("Search"), False)
+        self.food_panel = wx.Panel(
+            self.m_notebook1,
+            wx.ID_ANY,
+            wx.DefaultPosition,
+            wx.DefaultSize,
+            wx.TAB_TRAVERSAL,
+        )
+        self.m_notebook1.AddPage(self.food_panel, _("Food"), False)
+        self.comparison_panel = wx.Panel(
+            self.m_notebook1,
+            wx.ID_ANY,
+            wx.DefaultPosition,
+            wx.DefaultSize,
+            wx.TAB_TRAVERSAL,
+        )
+        self.m_notebook1.AddPage(self.comparison_panel, _("Comparison"), False)
 
-        bSizer3.Add( self.m_notebook1, 1, wx.EXPAND |wx.ALL, 5 )
+        bSizer3.Add(self.m_notebook1, 1, wx.EXPAND | wx.ALL, 5)
 
 
         self.SetSizer( bSizer3 )
@@ -213,22 +233,26 @@ class MyFrame3 ( wx.Frame ):
         self.Centre( wx.BOTH )
 
         # Connect Events
+        self.m_button13.Bind(wx.EVT_BUTTON, self.search)
+        self.m_button14.Bind(wx.EVT_BUTTON, self.resetApp)
+        self.m_button15.Bind(wx.EVT_BUTTON, self.addComparison)
+        self.m_button16.Bind(wx.EVT_BUTTON, self.exitApp)
+        self.notebook.Bind(wx.EVT_NOTEBOOK_PAGE_CHANGED, self.updatePage)
         self.search_results_grid.Bind( wx.grid.EVT_GRID_CELL_LEFT_DCLICK, self.selectFood )
         self.search_keyword_input.Bind( wx.EVT_TEXT, self.search )
         self.search_filter_nutrient_selection.Bind( wx.EVT_CHOICE, self.search )
         self.search_filter_range_min.Bind( wx.EVT_TEXT, self.search )
         self.search_filter_range_max.Bind( wx.EVT_TEXT, self.search )
-        self.m_button13.Bind( wx.EVT_BUTTON, self.search )
-        self.m_button14.Bind( wx.EVT_BUTTON, self.resetApp )
-        self.m_button15.Bind( wx.EVT_BUTTON, self.addComparison )
-        self.m_button16.Bind( wx.EVT_BUTTON, self.exitApp )
 
     def __del__( self ):
         pass
 
 
     # Virtual event handlers, override them in your derived class
-    def selectFood( self, event ):
+    def updatePage(self, event):
+        event.Skip()
+
+    def selectFood(self, event):
         event.Skip()
 
     def search( self, event ):
