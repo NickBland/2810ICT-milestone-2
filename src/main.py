@@ -78,6 +78,19 @@ class MyFrame(MyFrame):
         """
         self.Close()
 
+    def resetApp(self, event):
+        """
+        Reset the app, (search keyword, filters etc.)
+        """
+        self.search_keyword_input.SetLabel('')
+        self.search_filter_nutrient_selection.SetSelection(0)
+        self.search_filter_range_min.SetValue('')
+        self.search_filter_range_max.SetValue('')
+        self.search_filter_level_selection.SetSelection(0)
+        self.search_filter_highProtein.SetValue(False)
+        self.search_filter_lowSugar.SetValue(False)
+        self.search_result_selected.SetLabel('No Food Selected')
+        self.currently_selected_food = None
 
 # Run the WX application
 if __name__ == "__main__":
