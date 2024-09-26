@@ -73,6 +73,20 @@ class MyFrame(MyFrame):
         # Display the selected food item in the text box
         self.search_result_selected.SetLabel(selected_cell)
 
+    def resetApp(self, event):
+        """
+        Reset the app, (search keyword, filters etc.)
+        """
+        self.search_keyword_input.SetLabel('') # Search
+        self.search_filter_nutrient_selection.SetSelection(0) # Nutrients
+        self.search_filter_range_min.SetValue('') # range min
+        self.search_filter_range_max.SetValue('') # range max 
+        self.search_filter_level_selection.SetSelection(0) # Nutrition level (Low, Mid, High)
+        self.search_filter_highProtein.SetValue(False) # High Protein Checkbox
+        self.search_filter_lowSugar.SetValue(False) # Low Sugar Checkbox
+        self.search_result_selected.SetLabel('No Food Selected') # Selected Food item
+        self.currently_selected_food = None 
+
     def updatePage(self, event):
         updateTable(self.currently_selected_food, self)
         return
