@@ -215,6 +215,7 @@ class MyFrame3 ( wx.Frame ):
         # Connect Events
         self.search_results_grid.Bind( wx.grid.EVT_GRID_CELL_LEFT_DCLICK, self.selectFood )
         self.search_keyword_input.Bind( wx.EVT_TEXT, self.search )
+        self.search_filter_nutrient_selection.Bind( wx.EVT_CHOICE, self.search )
         self.search_filter_range_min.Bind( wx.EVT_TEXT, self.search )
         self.search_filter_range_max.Bind( wx.EVT_TEXT, self.search )
         self.m_button13.Bind( wx.EVT_BUTTON, self.search )
@@ -232,6 +233,7 @@ class MyFrame3 ( wx.Frame ):
 
     def search( self, event ):
         event.Skip()
+
 
 
 
