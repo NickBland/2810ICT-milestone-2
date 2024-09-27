@@ -75,6 +75,8 @@ class MyFrame(MyFrame):
 
         # Display the selected food item in the text box
         self.search_result_selected.SetLabel(selected_cell)
+        # Align back to centre (updating value for some reason resets the alignment to left)
+        self.search_result_selected.Align("center")
 
     def resetApp(self, event):
         """

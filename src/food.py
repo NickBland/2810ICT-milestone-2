@@ -148,6 +148,9 @@ def drawPieChart(food, UI):
         "K",
     ]
 
+    # Remove any vitamins that are 0
+    values, types = zip(*[(v, t) for v, t in zip(values, types) if v != 0])
+
     # Function to format the percentage labels depending on the size of the slice (tiny ones will overlap otherwise)
     def autopct_func(pct):
         return ("%1.1f%%" % pct) if pct > 1 else ""

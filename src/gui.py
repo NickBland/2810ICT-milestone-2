@@ -540,7 +540,7 @@ class MyFrame3(wx.Frame):
         )
 
         search_right_panel.Add(
-            self.search_result_label, 0, wx.ALIGN_CENTER_HORIZONTAL | wx.ALL, 5
+            self.search_result_label, 0, wx.ALL | wx.ALIGN_CENTER_HORIZONTAL, 5
         )
 
         self.search_result_selected = wx.StaticText(
@@ -549,7 +549,7 @@ class MyFrame3(wx.Frame):
             _("No Food Selected"),
             wx.DefaultPosition,
             wx.DefaultSize,
-            0,
+            wx.ALIGN_CENTER_HORIZONTAL,
         )
         self.search_result_selected.Wrap(-1)
 
