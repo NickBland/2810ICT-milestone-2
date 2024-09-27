@@ -3,14 +3,6 @@ import pandas as pd
 # import wx.grid
 from datatable import DataTable
 
-# Conversion to kcal from g
-FAT_CONVERSION = 9
-CARB_CONVERSION = 4
-SUGAR_CONVERSION = 4
-PROTEIN_CONVERSION = 4
-NUTRI_CONVERSION = 0
-
-
 def initDatabase(filePath: str):
     """
     Initialize the database object with the given file path
