@@ -146,7 +146,7 @@ class MyFrame3 ( wx.Frame ):
 
         search_filter_level_proteinChoices = [ _(u"N/A"), _(u"Low"), _(u"Mid"), _(u"High") ]
         self.search_filter_level_protein = wx.Choice( self.search_panel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, search_filter_level_proteinChoices, 0 )
-        self.search_filter_level_protein.SetSelection( 2 )
+        self.search_filter_level_protein.SetSelection( 0 )
         nutrition_filter_protein_box.Add( self.search_filter_level_protein, 0, wx.ALL, 5 )
 
         self.m_staticText18 = wx.StaticText( self.search_panel, wx.ID_ANY, _(u"Sugar"), wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -156,7 +156,7 @@ class MyFrame3 ( wx.Frame ):
 
         search_filter_level_sugarChoices = [ _(u"N/A"), _(u"Low"), _(u"Mid"), _(u"High") ]
         self.search_filter_level_sugar = wx.Choice( self.search_panel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, search_filter_level_sugarChoices, 0 )
-        self.search_filter_level_sugar.SetSelection( 1 )
+        self.search_filter_level_sugar.SetSelection( 0 )
         nutrition_filter_protein_box.Add( self.search_filter_level_sugar, 0, wx.ALL, 5 )
 
 

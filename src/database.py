@@ -37,29 +37,30 @@ def initDatabase(filePath: str):
     # Return the result
     return result, None
 
-
+# Function for searching the dataframe. 
 def searchDatabase(filters: dict, database: pd.DataFrame):
     print(filters)
     print(database)
 
+    # Grab all the data we need to search and filter the dataframe.
+    # Search:
     keyword = filters.get("keyword", "")
+    # Nutrients:
     nutrient = filters.get("nutrient", "")
+    # Nutrient Range:
+    min_value = filters.get("min", "")
+    max_value = filters.get("max", "")
+    # Nutrient Level:
     level_protein = filters.get("level-protein", 0)
-    print("THIS IS THE LEVEL PROTEIN + " + str(level_protein))
     level_sugar = filters.get("level-sugar", 0)
     level_carb = filters.get("level-carb", 0)
     level_fat = filters.get("level-fat", 0)
     level_nutri = filters.get("level-nutri", 0)
-    min_value = filters.get("min", "")
-    max_value = filters.get("max", "")
+    # Other (Checkboxes):
     high_protein = filters.get("high-protein", False)
     low_sugar = filters.get("low-sugar", False)
 
-    # debug
-    # print(type(nutrient))
-    # print(nutrient)
-
-    # Keyword Filter
+    # Filter the dataframe based on the keyword entered in the search bar.
     if keyword:
         filtered_db = database[
             database["food"].str.contains(keyword, regex=False, case=False, na=False)
@@ -71,7 +72,7 @@ def searchDatabase(filters: dict, database: pd.DataFrame):
         filtered_db["Nutrition Density"], errors="coerce"
     )
 
-    # NutrientFilter
+    # Nutrient Range filter, filter the dataframe based on min and max values.
     if nutrient and min_value and max_value:
         filtered_db[nutrient] = pd.to_numeric(filtered_db[nutrient], errors="coerce")
 
@@ -87,7 +88,11 @@ def searchDatabase(filters: dict, database: pd.DataFrame):
             (filtered_db[nutrient] >= min_value) & (filtered_db[nutrient] <= max_value)
         ]
 
+
     # resist the auto-filter!
+
+    # Checks and filters table depending on what is selected.
+    # Filters, dropdown boxes (Nutritional Level)
     if level_protein:
         filtered_db = checkFilters(filtered_db, level_protein, "Protein")
     if level_carb:
@@ -98,14 +103,15 @@ def searchDatabase(filters: dict, database: pd.DataFrame):
         filtered_db = checkFilters(filtered_db, level_sugar, "Sugars")
     if level_nutri:
         filtered_db = checkFilters(filtered_db, level_nutri, "Nutrition Density")
-    # if high_protein:
-    #     filterHigh(filtered_db, 'Protein')
-    # if low_sugar:
-    #     filterLow(filtered_db, 'Sugars')
 
+    # Filters, Checkboxes (Other)     
+    if high_protein == True:
+        filtered_db = filterHigh(filtered_db, "Protein")
+    if low_sugar == True:
+        filtered_db = filterLow(filtered_db, "Sugars")
     return filtered_db
 
-
+# Check which filter we are using
 def checkFilters(
     database: pd.DataFrame, filters: int, nutrient: str 
 ):
@@ -118,28 +124,22 @@ def checkFilters(
 
     return database
 
-
+# (Low) Filter the nutrient based on if it is < 33% of the max value.
 def filterLow(database: pd.DataFrame, nutrient: str):
     max_value = database[nutrient].max()
     max_value = 0.33 * max_value
     database = database[database[nutrient] < max_value]
     return database
 
-
+# (Mid) Filter the nutrient based on if it is >= 33% and < 66% of the max value.
 def filterMid(database: pd.DataFrame, nutrient: str):
     max_value = database[nutrient].max()
-    print("DEBUG")
-    print(type(max_value))
-    print(max_value)
     min_value = 0.33 * max_value
     max_value = 0.66 * max_value
-    print("MIN MAX FLAG")
-    print(min_value)
-    print(max_value)
     database = database[(database[nutrient] >= min_value) & (database[nutrient] < max_value)]
     return database
 
-
+# (High) Filter the nutrient based on if it is > 66% of the max value.
 def filterHigh(database: pd.DataFrame, nutrient: str):
 
     max_value = database[nutrient].max()

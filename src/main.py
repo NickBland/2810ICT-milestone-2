@@ -47,6 +47,7 @@ class MyFrame(MyFrame):
             "level-fat": self.search_filter_level_fat.GetSelection(),
             "level-nutri": self.search_filter_level_nutri.GetSelection(),            
             "low-sugar": self.search_filter_lowSugar.GetValue(),
+            "high-protein": self.search_filter_highProtein.GetValue()
         }
 
         results = searchDatabase(search_filters, DATABASE)
