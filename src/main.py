@@ -17,7 +17,7 @@ class MyFrame(MyFrame):
         # Initialise the database object
         global DATABASE  # Required to edit the global variable
         DATABASE, error = initDatabase(r"./Food_Nutrition_Dataset.csv")
-        print(DATABASE);
+        print(DATABASE)
 
         # Initialise the currently selected food to be none
         self.currently_selected_food = None
