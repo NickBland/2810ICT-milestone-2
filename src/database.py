@@ -3,7 +3,12 @@ import pandas as pd
 # import wx.grid
 from datatable import DataTable
 
-
+# Conversion to kcal from g
+FAT_CONVERSION = 9
+CARB_CONVERSION = 4
+SUGAR_CONVERSION = 4
+PROTEIN_CONVERSION = 4
+NUTRI_CONVERSION = 0
 
 def initDatabase(filePath: str):
     """
@@ -38,14 +43,17 @@ def searchDatabase(filters: dict, database: pd.DataFrame):
     
     keyword = filters.get('keyword', '')
     nutrient = filters.get('nutrient', '')
-    level = filters.get('level', 0)
+    level_protein = filters.get('level-protein', 0)
+    level_sugar = filters.get('level-sugar', 0 )
+    level_carb = filters.get('level-carb', 0)
+    level_fat = filters.get('level-fat', 0)
+    level_nutri = filters.get('level-nutri', 0)
     min_value = filters.get('min', '')
     max_value = filters.get('max', '')
     high_protein = filters.get('high-protein', False)
     low_sugar = filters.get('low-sugar', False)
 
     #debug
-    print(level)
     # print(type(nutrient))
     # print(nutrient)
     
@@ -55,7 +63,7 @@ def searchDatabase(filters: dict, database: pd.DataFrame):
     else:
         filtered_db = database
 
-    filtered_db['Nutrition Density'] = pd.to_numeric(filtered_db['Nutrition Density'], errors='coerce')
+    filtered_db.loc['Nutrition Density'] = pd.to_numeric(filtered_db['Nutrition Density'], errors='coerce')
 
     # NutrientFilter
     if nutrient and min_value and max_value:
@@ -72,38 +80,70 @@ def searchDatabase(filters: dict, database: pd.DataFrame):
 
         filtered_db = filtered_db[(filtered_db[nutrient] >= min_value) & (filtered_db[nutrient] <= max_value)]
 
-    match level:
-        case 0:
-            filtered_db = filterLow(filtered_db, nutrient)
-        case 1: 
-            filtered_db = filterMid(filtered_db, nutrient)
-        case 2: 
-            filtered_db = filterHigh(filtered_db, nutrient)
-
-    if high_protein:
-        filterHigh(filtered_db, 'Protein')
-    if low_sugar:
-        filterLow(filtered_db, 'Sugars')
+    if level_protein:
+        filtered_db = checkFilters(filtered_db, level_protein, 'Protein', PROTEIN_CONVERSION)
+    if level_carb:
+        filtered_db = checkFilters(filtered_db, level_carb, 'Carbohydrates', CARB_CONVERSION)
+    if level_fat:
+        filtered_db = checkFilters(filtered_db, level_fat, 'Fat', FAT_CONVERSION)
+    if level_sugar:
+        filtered_db = checkFilters(filtered_db, level_sugar, 'Sugars', SUGAR_CONVERSION)
+    if level_nutri:
+        filtered_db = checkFilters(filtered_db, level_nutri,'Nutrition Density', NUTRI_CONVERSION)
+    # if high_protein:
+    #     filterHigh(filtered_db, 'Protein')
+    # if low_sugar:
+    #     filterLow(filtered_db, 'Sugars')
 
     return filtered_db
 
-def filterLow(database: pd.DataFrame, nutrient: str):
-
-    database['nutrient_percentage'] = database[nutrient] / database['Nutrition Density']
-    database = database[database['nutrient_percentage'] < 0.33]
+def checkFilters(database: pd.DataFrame, filters: int, nutrient: str, conversion_type: str = ''):
+    match filters:
+        case 1: 
+            database = filterLow(database, nutrient, conversion_type)
+        case 2: 
+            database = filterMid(database, nutrient, conversion_type)
+        case 3:
+            database = filterHigh(database, nutrient, conversion_type)
+    
     return database
 
-def filterMid(database: pd.DataFrame, nutrient: str):
 
-    database['nutrient_percentage'] = database[nutrient] / database['Nutrition Density']
-    database = database[(database['nutrient_percentage'] >= 0.33) & (database['nutrient_percentage'] >= 0.66) ]
-    return database
+def filterLow(database: pd.DataFrame, nutrient: str, conversion_type: str):
 
-def filterHigh(database: pd.DataFrame, nutrient: str):
+    if nutrient == 'Nutrition Density':
+        database['nutrient_percentage'] = database['Nutrition Density'] / database['Caloric Value']
+        database = database[database['nutrient_percentage'] < 0.33]
+        return database
+    else:
+        database['converted_nutrient'] = database[nutrient] * conversion_type
+        database['nutrient_percentage'] = database['converted_nutrient'] / database['Caloric Value']
+        database = database[database['nutrient_percentage'] < 0.33]
+        return database
 
-    database['nutrient_percentage'] = database[nutrient] / database['Nutrition Density']
-    database = database[database['nutrient_percentage'] > 0.66]
-    return database
+def filterMid(database: pd.DataFrame, nutrient: str, conversion_type: str):
+
+    if nutrient == 'Nutrition Density':
+        database['nutrient_percentage'] = database['Nutrition Density'] / database['Caloric Value']
+        database = database[(database['nutrient_percentage'] >= 0.33) & (database['nutrient_percentage'] < 0.66)]
+        return database
+    else:
+        database['converted_nutrient'] = database[nutrient] * conversion_type
+        database['nutrient_percentage'] = database['converted_nutrient'] / database['Caloric Value']
+        database = database[(database['nutrient_percentage'] >= 0.33) & (database['nutrient_percentage'] < 0.66)]
+        return database
+
+def filterHigh(database: pd.DataFrame, nutrient: str, conversion_type: str):
+
+    if nutrient == 'Nutrition Density':
+        database['nutrient_percentage'] = database['Nutrition Density'] / database['Caloric Value']
+        database = database[database['nutrient_percentage'] > 0.66]
+        return database
+    else:   
+        database['converted_nutrient'] = database[nutrient] * conversion_type
+        database['nutrient_percentage'] = database['converted_nutrient'] / database['Caloric Value']
+        database = database[database['nutrient_percentage'] > 0.66]
+        return database
 
         
 def displayResults(database: pd .DataFrame, grid):

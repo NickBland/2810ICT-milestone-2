@@ -11,7 +11,7 @@ DATABASE = None  # Global database object - Pandas.DataFrame object
 class MyFrame(MyFrame):
     def __init__(self):
         super().__init__(None)
-        # Workaround to show the hint text in the input boxes, as this is not an option in the WXFormBuilder app
+        # Workaround to show the hint text mainin the input boxes, as this is not an option in the WXFormBuilder app
         self.search_keyword_input.SetHint("Enter keywords")
 
         # Initialise the database object
@@ -41,8 +41,11 @@ class MyFrame(MyFrame):
             "nutrient": self.search_filter_nutrient_selection.GetStringSelection(),
             "min": self.search_filter_range_min.GetValue(),
             "max": self.search_filter_range_max.GetValue(),
-            "level": self.search_filter_level_selection.GetSelection(),
-            "high-protein": self.search_filter_highProtein.GetValue(),
+            "level-protein": self.search_filter_level_protein.GetSelection(),
+            "level-sugar": self.search_filter_level_sugar.GetSelection(),
+            "level-carb": self.search_filter_level_carb.GetSelection(),
+            "level-fat": self.search_filter_level_fat.GetSelection(),
+            "level-nutri": self.search_filter_level_nutri.GetSelection(),            
             "low-sugar": self.search_filter_lowSugar.GetValue(),
         }
 
@@ -80,7 +83,13 @@ class MyFrame(MyFrame):
         self.search_filter_nutrient_selection.SetSelection(0) # Nutrients
         self.search_filter_range_min.SetValue('') # range min
         self.search_filter_range_max.SetValue('') # range max 
-        self.search_filter_level_selection.SetSelection(0) # Nutrition level (Low, Mid, High)
+
+        self.search_filter_level_protein.SetSelection(0) 
+        self.search_filter_level_carb.SetSelection(0)
+        self.search_filter_level_fat.SetSelection(0)     # Nutrition level (N/A, Low, Mid, High)
+        self.search_filter_level_sugar.SetSelection(0)
+        self.search_filter_level_nutri.SetSelection(0)
+        
         self.search_filter_highProtein.SetValue(False) # High Protein Checkbox
         self.search_filter_lowSugar.SetValue(False) # Low Sugar Checkbox
         self.search_result_selected.SetLabel('No Food Selected') # Selected Food item
