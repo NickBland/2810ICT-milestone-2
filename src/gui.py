@@ -310,17 +310,83 @@ class MyFrame3(wx.Frame):
 
         bSizer111 = wx.BoxSizer(wx.HORIZONTAL)
 
-        self.n_level_title_protein = wx.StaticText(
-            self.search_panel,
-            wx.ID_ANY,
-            _("Protein"),
-            wx.DefaultPosition,
-            wx.DefaultSize,
-            0,
-        )
-        self.n_level_title_protein.Wrap(-1)
+        nutrition_level_filter_panel = wx.BoxSizer( wx.VERTICAL )
 
-        bSizer111.Add(self.n_level_title_protein, 0, wx.ALL, 5)
+        bSizer15 = wx.BoxSizer( wx.HORIZONTAL )
+
+        nutrition_filter_protein_box = wx.BoxSizer( wx.VERTICAL )
+
+        self.n_level_title_protein = wx.StaticText( self.search_panel, wx.ID_ANY, _(u"Protein"), wx.DefaultPosition, wx.DefaultSize, 0 )
+        self.n_level_title_protein.Wrap( -1 )
+
+        nutrition_filter_protein_box.Add( self.n_level_title_protein, 1, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5 )
+
+        search_filter_level_proteinChoices = [ _(u"N/A"), _(u"Low"), _(u"Mid"), _(u"High") ]
+        self.search_filter_level_protein = wx.Choice( self.search_panel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, search_filter_level_proteinChoices, 0 )
+        self.search_filter_level_protein.SetSelection( 0 )
+        nutrition_filter_protein_box.Add( self.search_filter_level_protein, 0, wx.ALL, 5 )
+
+        self.m_staticText18 = wx.StaticText( self.search_panel, wx.ID_ANY, _(u"Sugar"), wx.DefaultPosition, wx.DefaultSize, 0 )
+        self.m_staticText18.Wrap( -1 )
+
+        nutrition_filter_protein_box.Add( self.m_staticText18, 1, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5 )
+
+        search_filter_level_sugarChoices = [ _(u"N/A"), _(u"Low"), _(u"Mid"), _(u"High") ]
+        self.search_filter_level_sugar = wx.Choice( self.search_panel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, search_filter_level_sugarChoices, 0 )
+        self.search_filter_level_sugar.SetSelection( 0 )
+        nutrition_filter_protein_box.Add( self.search_filter_level_sugar, 0, wx.ALL, 5 )
+
+
+        bSizer15.Add( nutrition_filter_protein_box, 0, wx.ALIGN_CENTER, 5 )
+
+        nutrition_level_carb_box = wx.BoxSizer( wx.VERTICAL )
+
+        self.n_level_title_carb = wx.StaticText( self.search_panel, wx.ID_ANY, _(u"Carbohydrates"), wx.DefaultPosition, wx.DefaultSize, 0 )
+        self.n_level_title_carb.Wrap( -1 )
+
+        nutrition_level_carb_box.Add( self.n_level_title_carb, 0, wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
+
+        search_filter_level_carbChoices = [ _(u"N/A"), _(u"Low"), _(u"Mid"), _(u"High") ]
+        self.search_filter_level_carb = wx.Choice( self.search_panel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, search_filter_level_carbChoices, 0 )
+        self.search_filter_level_carb.SetSelection( 0 )
+        nutrition_level_carb_box.Add( self.search_filter_level_carb, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
+
+        self.n_level_title_nutri1 = wx.StaticText( self.search_panel, wx.ID_ANY, _(u"Nutritional density"), wx.DefaultPosition, wx.DefaultSize, 0 )
+        self.n_level_title_nutri1.Wrap( -1 )
+
+        nutrition_level_carb_box.Add( self.n_level_title_nutri1, 0, wx.ALL, 5 )
+
+        search_filter_level_nutriChoices = [ _(u"N/A"), _(u"Low"), _(u"Mid"), _(u"High") ]
+        self.search_filter_level_nutri = wx.Choice( self.search_panel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, search_filter_level_nutriChoices, 0 )
+        self.search_filter_level_nutri.SetSelection( 0 )
+        nutrition_level_carb_box.Add( self.search_filter_level_nutri, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
+
+
+        bSizer15.Add( nutrition_level_carb_box, 0, wx.ALIGN_CENTER_VERTICAL, 5 )
+
+        nutrition_level_fat_box = wx.BoxSizer( wx.VERTICAL )
+
+        self.n_level_title_fat = wx.StaticText( self.search_panel, wx.ID_ANY, _(u"Fat"), wx.DefaultPosition, wx.DefaultSize, 0 )
+        self.n_level_title_fat.Wrap( -1 )
+
+        nutrition_level_fat_box.Add( self.n_level_title_fat, 0, wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
+
+        search_filter_level_fatChoices = [ _(u"N/A"), _(u"Low"), _(u"Mid"), _(u"High") ]
+        self.search_filter_level_fat = wx.Choice( self.search_panel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, search_filter_level_fatChoices, 0 )
+        self.search_filter_level_fat.SetSelection( 0 )
+        nutrition_level_fat_box.Add( self.search_filter_level_fat, 0, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5 )
+
+
+        bSizer15.Add( nutrition_level_fat_box, 1, 0, 5 )
+
+
+        nutrition_level_filter_panel.Add( bSizer15, 1, wx.ALIGN_CENTER_HORIZONTAL, 5 )
+
+
+        search_right_panel.Add( nutrition_level_filter_panel, 0, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5 )
+
+        self.search_filter_other_label = wx.StaticText( self.search_panel, wx.ID_ANY, _(u"Other:"), wx.DefaultPosition, wx.DefaultSize, 0 )
+        self.search_filter_other_label.Wrap( -1 )
 
         self.n_level_title_fat = wx.StaticText(
             self.search_panel,
@@ -561,6 +627,23 @@ class MyFrame3(wx.Frame):
                 wx.EmptyString,
             )
         )
+        # Connect Events
+        self.search_results_grid.Bind( wx.grid.EVT_GRID_CELL_LEFT_DCLICK, self.selectFood )
+        self.search_keyword_input.Bind( wx.EVT_TEXT, self.search )
+        self.search_filter_nutrient_selection.Bind( wx.EVT_CHOICE, self.search )
+        self.search_filter_range_min.Bind( wx.EVT_TEXT, self.search )
+        self.search_filter_range_max.Bind( wx.EVT_TEXT, self.search )
+        self.search_filter_level_protein.Bind( wx.EVT_CHOICE, self.search )
+        self.search_filter_level_sugar.Bind( wx.EVT_CHOICE, self.search )
+        self.search_filter_level_carb.Bind( wx.EVT_CHOICE, self.search )
+        self.search_filter_level_nutri.Bind( wx.EVT_CHOICE, self.search )
+        self.search_filter_level_fat.Bind( wx.EVT_CHOICE, self.search )
+        self.search_filter_highProtein.Bind( wx.EVT_CHECKBOX, self.search )
+        self.search_filter_lowSugar.Bind( wx.EVT_CHECKBOX, self.search )
+        self.m_button13.Bind( wx.EVT_BUTTON, self.search )
+        self.m_button14.Bind( wx.EVT_BUTTON, self.resetApp )
+        self.m_button15.Bind( wx.EVT_BUTTON, self.addComparison )
+        self.m_button16.Bind( wx.EVT_BUTTON, self.exitApp )
 
         food_information_sizer.Add(
             self.food_none_warning, 0, wx.ALL | wx.ALIGN_CENTER_HORIZONTAL, 5
