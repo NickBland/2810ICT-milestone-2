@@ -1578,7 +1578,7 @@
                                       <property name="minimize_button">0</property>
                                       <property name="minimum_size"></property>
                                       <property name="moveable">1</property>
-                                      <property name="name">search_filter_level_selection12</property>
+                                      <property name="name">search_filter_level_carb</property>
                                       <property name="pane_border">1</property>
                                       <property name="pane_position"></property>
                                       <property name="pane_size"></property>
@@ -1706,7 +1706,7 @@
                                       <property name="minimize_button">0</property>
                                       <property name="minimum_size"></property>
                                       <property name="moveable">1</property>
-                                      <property name="name">search_filter_level_selection111</property>
+                                      <property name="name">search_filter_level_nutri</property>
                                       <property name="pane_border">1</property>
                                       <property name="pane_position"></property>
                                       <property name="pane_size"></property>
@@ -1845,7 +1845,7 @@
                                       <property name="minimize_button">0</property>
                                       <property name="minimum_size"></property>
                                       <property name="moveable">1</property>
-                                      <property name="name">search_filter_level_selection1</property>
+                                      <property name="name">search_filter_level_fat</property>
                                       <property name="pane_border">1</property>
                                       <property name="pane_position"></property>
                                       <property name="pane_size"></property>
