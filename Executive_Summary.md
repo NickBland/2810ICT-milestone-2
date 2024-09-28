@@ -35,9 +35,9 @@ The Nutrition Breakdown allows users to select a food item and generate visualiz
 
 ### Screenshots
 Include screenshots for each step demonstrating the use of this feature.  
-[1]![Nutrition Breakdown screenshot 1.png](./Nutrition_Breakdown_screenshot_3_.png)
-[2]![Nutrition_Breakdown_screenshot_2.png](./Nutrition_Breakdown_screenshot_3_.png)
-[3]![Nutrition_Breakdown_screenshot_3.png](./Nutrition_Breakdown_screenshot_3_.png)
+[1]![Nutrition_Breakdown_screenshot_1_.png](./Nutrition_Breakdown_screenshot_1.png)
+[2]![Nutrition_Breakdown_screenshot_2_.png](./Nutrition_Breakdown_screenshot_2_.png)
+[2]![Nutrition_Breakdown_screenshot 3 ](./![Nutrition_Breakdown_screenshot_3.png](Executive_summary_screenshots%2FNutrition_Breakdown_screenshot_3.png))
 
 ---
 
