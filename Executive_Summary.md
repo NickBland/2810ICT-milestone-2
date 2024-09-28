@@ -22,7 +22,7 @@ Include screenshots for each step demonstrating the use of this feature.
 ![Step 1](![img.png](img.png))
 ![Step 2](![img_1.png](img_1.png))
 ![Step 3](![img_2.png](img_2.png))
-![Step 3](![img_3.png](img_3.png))
+![Step 4](![img_3.png](img_3.png))
 
 ---
 
