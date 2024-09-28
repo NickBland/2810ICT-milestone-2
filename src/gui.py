@@ -46,36 +46,14 @@ class MyFrame3(wx.Frame):
             wx.DefaultSize,
             wx.TAB_TRAVERSAL,
         )
-        search_bSizer = wx.BoxSizer(wx.HORIZONTAL)
-
-        search_left_panel = wx.BoxSizer(wx.VERTICAL)
-
-        self.nutrient_panel_top = wx.Panel(
-            self.search_panel,
-            wx.ID_ANY,
-            wx.DefaultPosition,
-            wx.DefaultSize,
-            wx.TAB_TRAVERSAL,
-        )
-        search_left_panel.Add(self.nutrient_panel_top, 1, wx.EXPAND | wx.ALL, 5)
-
-        self.nutrient_panel_bot = wx.Panel(
-            self.search_panel,
-            wx.ID_ANY,
-            wx.DefaultPosition,
-            wx.DefaultSize,
-            wx.TAB_TRAVERSAL,
-        )
-        search_left_panel.Add(self.nutrient_panel_bot, 1, wx.EXPAND | wx.ALL, 5)
-
-        search_bSizer.Add(search_left_panel, 1, wx.EXPAND, 5)
+        search_view_wrapper = wx.BoxSizer(wx.HORIZONTAL)
 
         self.search_results_grid = wx.grid.Grid(
             self.search_panel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0
         )
 
         # Grid
-        self.search_results_grid.CreateGrid(2, 1)
+        self.search_results_grid.CreateGrid(20, 1)
         self.search_results_grid.EnableEditing(False)
         self.search_results_grid.EnableGridLines(True)
         self.search_results_grid.EnableDragGridSize(False)
@@ -96,7 +74,7 @@ class MyFrame3(wx.Frame):
 
         # Cell Defaults
         self.search_results_grid.SetDefaultCellAlignment(wx.ALIGN_LEFT, wx.ALIGN_TOP)
-        search_bSizer.Add(self.search_results_grid, 1, wx.ALL | wx.EXPAND, 5)
+        search_view_wrapper.Add(self.search_results_grid, 1, wx.ALL | wx.EXPAND, 5)
 
         search_right_panel = wx.BoxSizer(wx.VERTICAL)
 
@@ -473,42 +451,6 @@ class MyFrame3(wx.Frame):
             nutrition_level_filter_panel, 0, wx.ALIGN_CENTER_HORIZONTAL | wx.ALL, 5
         )
 
-        self.search_filter_other_label = wx.StaticText(
-            self.search_panel,
-            wx.ID_ANY,
-            _("Other:"),
-            wx.DefaultPosition,
-            wx.DefaultSize,
-            0,
-        )
-        self.search_filter_other_label.Wrap(-1)
-
-        search_right_panel.Add(self.search_filter_other_label, 0, wx.ALL, 5)
-
-        bSizer9 = wx.BoxSizer(wx.HORIZONTAL)
-
-        self.search_filter_highProtein = wx.CheckBox(
-            self.search_panel,
-            wx.ID_ANY,
-            _("High Protein"),
-            wx.DefaultPosition,
-            wx.DefaultSize,
-            0,
-        )
-        bSizer9.Add(self.search_filter_highProtein, 0, wx.ALL, 5)
-
-        self.search_filter_lowSugar = wx.CheckBox(
-            self.search_panel,
-            wx.ID_ANY,
-            _("Low Sugar"),
-            wx.DefaultPosition,
-            wx.DefaultSize,
-            0,
-        )
-        bSizer9.Add(self.search_filter_lowSugar, 0, wx.ALL, 5)
-
-        search_right_panel.Add(bSizer9, 0, wx.ALIGN_CENTER_HORIZONTAL, 5)
-
         self.m_staticline1 = wx.StaticLine(
             self.search_panel,
             wx.ID_ANY,
@@ -559,17 +501,17 @@ class MyFrame3(wx.Frame):
 
         bSizer10 = wx.BoxSizer(wx.HORIZONTAL)
 
-        self.m_button13 = wx.Button(
+        self.search_search_button = wx.Button(
             self.search_panel,
             wx.ID_ANY,
-            _("View Data"),
+            _("Search"),
             wx.DefaultPosition,
             wx.DefaultSize,
             0,
         )
-        bSizer10.Add(self.m_button13, 1, wx.ALL, 5)
+        bSizer10.Add(self.search_search_button, 1, wx.ALL, 5)
 
-        self.m_button14 = wx.Button(
+        self.search_reset_button = wx.Button(
             self.search_panel,
             wx.ID_ANY,
             _("Reset"),
@@ -577,23 +519,23 @@ class MyFrame3(wx.Frame):
             wx.DefaultSize,
             0,
         )
-        bSizer10.Add(self.m_button14, 1, wx.ALL, 5)
+        bSizer10.Add(self.search_reset_button, 1, wx.ALL, 5)
 
         search_right_panel.Add(bSizer10, 1, wx.EXPAND, 5)
 
         bSizer11 = wx.BoxSizer(wx.HORIZONTAL)
 
-        self.m_button15 = wx.Button(
+        self.search_compare_button = wx.Button(
             self.search_panel,
             wx.ID_ANY,
-            _("Add/Remove from Comparison"),
+            _("Add to Comparison"),
             wx.DefaultPosition,
             wx.DefaultSize,
             0,
         )
-        bSizer11.Add(self.m_button15, 1, wx.ALL, 5)
+        bSizer11.Add(self.search_compare_button, 1, wx.ALL, 5)
 
-        self.m_button16 = wx.Button(
+        self.search_exit_button = wx.Button(
             self.search_panel,
             wx.ID_ANY,
             _("Exit"),
@@ -601,15 +543,15 @@ class MyFrame3(wx.Frame):
             wx.DefaultSize,
             0,
         )
-        bSizer11.Add(self.m_button16, 1, wx.ALL, 5)
+        bSizer11.Add(self.search_exit_button, 1, wx.ALL, 5)
 
         search_right_panel.Add(bSizer11, 1, wx.EXPAND, 5)
 
-        search_bSizer.Add(search_right_panel, 1, wx.EXPAND, 5)
+        search_view_wrapper.Add(search_right_panel, 1, wx.EXPAND, 5)
 
-        self.search_panel.SetSizer(search_bSizer)
+        self.search_panel.SetSizer(search_view_wrapper)
         self.search_panel.Layout()
-        search_bSizer.Fit(self.search_panel)
+        search_view_wrapper.Fit(self.search_panel)
         self.notebook.AddPage(self.search_panel, _("Search"), True)
         self.food_panel = wx.Panel(
             self.notebook,
@@ -618,7 +560,7 @@ class MyFrame3(wx.Frame):
             wx.DefaultSize,
             wx.TAB_TRAVERSAL,
         )
-        food_information_sizer = wx.BoxSizer(wx.VERTICAL)
+        food_information_wrapper = wx.BoxSizer(wx.VERTICAL)
 
         self.food_selected_label = wx.StaticText(
             self.food_panel,
@@ -641,7 +583,7 @@ class MyFrame3(wx.Frame):
             )
         )
 
-        food_information_sizer.Add(
+        food_information_wrapper.Add(
             self.food_selected_label, 0, wx.ALL | wx.ALIGN_CENTER_HORIZONTAL, 5
         )
 
@@ -666,7 +608,7 @@ class MyFrame3(wx.Frame):
             )
         )
 
-        food_information_sizer.Add(
+        food_information_wrapper.Add(
             self.food_none_warning, 0, wx.ALL | wx.ALIGN_CENTER_HORIZONTAL, 5
         )
 
@@ -751,13 +693,13 @@ class MyFrame3(wx.Frame):
 
         food_information_grid.Add(food_grid_panel, 1, wx.EXPAND, 5)
 
-        food_information_sizer.Add(food_information_grid, 1, wx.EXPAND, 5)
+        food_information_wrapper.Add(food_information_grid, 1, wx.EXPAND, 5)
 
-        food_information_sizer.Add((0, 15), 1, wx.EXPAND, 5)
+        food_information_wrapper.Add((0, 15), 1, wx.EXPAND, 5)
 
-        self.food_panel.SetSizer(food_information_sizer)
+        self.food_panel.SetSizer(food_information_wrapper)
         self.food_panel.Layout()
-        food_information_sizer.Fit(self.food_panel)
+        food_information_wrapper.Fit(self.food_panel)
         self.notebook.AddPage(self.food_panel, _("Food"), False)
         self.comparison_panel = wx.Panel(
             self.notebook,
@@ -766,6 +708,227 @@ class MyFrame3(wx.Frame):
             wx.DefaultSize,
             wx.TAB_TRAVERSAL,
         )
+        comparison_view_wrapper = wx.BoxSizer(wx.VERTICAL)
+
+        self.comparison_label = wx.StaticText(
+            self.comparison_panel,
+            wx.ID_ANY,
+            _("Compare Two Foods"),
+            wx.DefaultPosition,
+            wx.DefaultSize,
+            0,
+        )
+        self.comparison_label.Wrap(-1)
+
+        self.comparison_label.SetFont(
+            wx.Font(
+                20,
+                wx.FONTFAMILY_DEFAULT,
+                wx.FONTSTYLE_NORMAL,
+                wx.FONTWEIGHT_NORMAL,
+                False,
+                wx.EmptyString,
+            )
+        )
+
+        comparison_view_wrapper.Add(
+            self.comparison_label, 0, wx.ALL | wx.ALIGN_CENTER_HORIZONTAL, 5
+        )
+
+        comparison_viewer_box = wx.BoxSizer(wx.HORIZONTAL)
+
+        comparison_foodA_box = wx.BoxSizer(wx.VERTICAL)
+
+        self.comparison_foodA_name = wx.StaticText(
+            self.comparison_panel,
+            wx.ID_ANY,
+            _("No Food Selected"),
+            wx.DefaultPosition,
+            wx.DefaultSize,
+            0,
+        )
+        self.comparison_foodA_name.Wrap(-1)
+
+        comparison_foodA_box.Add(
+            self.comparison_foodA_name, 0, wx.ALL | wx.ALIGN_CENTER_HORIZONTAL, 5
+        )
+
+        comparison_viewer_box.Add(comparison_foodA_box, 1, wx.EXPAND, 5)
+
+        comparison_foodB_box = wx.BoxSizer(wx.VERTICAL)
+
+        self.comparison_foodB_name = wx.StaticText(
+            self.comparison_panel,
+            wx.ID_ANY,
+            _("No Food Selected"),
+            wx.DefaultPosition,
+            wx.DefaultSize,
+            0,
+        )
+        self.comparison_foodB_name.Wrap(-1)
+
+        comparison_foodB_box.Add(
+            self.comparison_foodB_name, 0, wx.ALL | wx.ALIGN_CENTER_HORIZONTAL, 5
+        )
+
+        comparison_viewer_box.Add(comparison_foodB_box, 1, wx.EXPAND, 5)
+
+        comparison_view_wrapper.Add(comparison_viewer_box, 0, wx.EXPAND, 5)
+
+        self.comparison_notebook = wx.Notebook(
+            self.comparison_panel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0
+        )
+        self.comparison_grids = wx.Panel(
+            self.comparison_notebook,
+            wx.ID_ANY,
+            wx.DefaultPosition,
+            wx.DefaultSize,
+            wx.TAB_TRAVERSAL,
+        )
+        gSizer8 = wx.GridSizer(0, 2, 0, 0)
+
+        self.comparison_foodA_grid = wx.grid.Grid(
+            self.comparison_grids, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0
+        )
+
+        # Grid
+        self.comparison_foodA_grid.CreateGrid(25, 2)
+        self.comparison_foodA_grid.EnableEditing(False)
+        self.comparison_foodA_grid.EnableGridLines(True)
+        self.comparison_foodA_grid.EnableDragGridSize(False)
+        self.comparison_foodA_grid.SetMargins(0, 0)
+
+        # Columns
+        self.comparison_foodA_grid.EnableDragColMove(False)
+        self.comparison_foodA_grid.EnableDragColSize(True)
+        self.comparison_foodA_grid.SetColLabelAlignment(
+            wx.ALIGN_CENTER, wx.ALIGN_CENTER
+        )
+
+        # Rows
+        self.comparison_foodA_grid.EnableDragRowSize(True)
+        self.comparison_foodA_grid.SetRowLabelAlignment(
+            wx.ALIGN_CENTER, wx.ALIGN_CENTER
+        )
+
+        # Label Appearance
+
+        # Cell Defaults
+        self.comparison_foodA_grid.SetDefaultCellAlignment(wx.ALIGN_LEFT, wx.ALIGN_TOP)
+        gSizer8.Add(
+            self.comparison_foodA_grid, 0, wx.ALL | wx.ALIGN_CENTER_HORIZONTAL, 5
+        )
+
+        self.comparison_foodB_grid = wx.grid.Grid(
+            self.comparison_grids, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0
+        )
+
+        # Grid
+        self.comparison_foodB_grid.CreateGrid(25, 2)
+        self.comparison_foodB_grid.EnableEditing(False)
+        self.comparison_foodB_grid.EnableGridLines(True)
+        self.comparison_foodB_grid.EnableDragGridSize(False)
+        self.comparison_foodB_grid.SetMargins(0, 0)
+
+        # Columns
+        self.comparison_foodB_grid.EnableDragColMove(False)
+        self.comparison_foodB_grid.EnableDragColSize(True)
+        self.comparison_foodB_grid.SetColLabelAlignment(
+            wx.ALIGN_CENTER, wx.ALIGN_CENTER
+        )
+
+        # Rows
+        self.comparison_foodB_grid.EnableDragRowSize(True)
+        self.comparison_foodB_grid.SetRowLabelAlignment(
+            wx.ALIGN_CENTER, wx.ALIGN_CENTER
+        )
+
+        # Label Appearance
+
+        # Cell Defaults
+        self.comparison_foodB_grid.SetDefaultCellAlignment(wx.ALIGN_LEFT, wx.ALIGN_TOP)
+        gSizer8.Add(
+            self.comparison_foodB_grid, 0, wx.ALL | wx.ALIGN_CENTER_HORIZONTAL, 5
+        )
+
+        self.comparison_grids.SetSizer(gSizer8)
+        self.comparison_grids.Layout()
+        gSizer8.Fit(self.comparison_grids)
+        self.comparison_notebook.AddPage(
+            self.comparison_grids, _("Nutritional Information"), True
+        )
+        self.comparison_micro = wx.Panel(
+            self.comparison_notebook,
+            wx.ID_ANY,
+            wx.DefaultPosition,
+            wx.DefaultSize,
+            wx.TAB_TRAVERSAL,
+        )
+        gSizer9 = wx.GridSizer(0, 2, 0, 0)
+
+        self.comparison_foodA_micro = wx.Panel(
+            self.comparison_micro,
+            wx.ID_ANY,
+            wx.DefaultPosition,
+            wx.DefaultSize,
+            wx.TAB_TRAVERSAL,
+        )
+        gSizer9.Add(self.comparison_foodA_micro, 1, wx.EXPAND | wx.ALL, 5)
+
+        self.comparison_foodB_micro = wx.Panel(
+            self.comparison_micro,
+            wx.ID_ANY,
+            wx.DefaultPosition,
+            wx.DefaultSize,
+            wx.TAB_TRAVERSAL,
+        )
+        gSizer9.Add(self.comparison_foodB_micro, 1, wx.EXPAND | wx.ALL, 5)
+
+        self.comparison_micro.SetSizer(gSizer9)
+        self.comparison_micro.Layout()
+        gSizer9.Fit(self.comparison_micro)
+        self.comparison_notebook.AddPage(
+            self.comparison_micro, _("Micronutrients"), False
+        )
+        self.comparison_macro = wx.Panel(
+            self.comparison_notebook,
+            wx.ID_ANY,
+            wx.DefaultPosition,
+            wx.DefaultSize,
+            wx.TAB_TRAVERSAL,
+        )
+        gSizer10 = wx.GridSizer(0, 2, 0, 0)
+
+        self.comparison_foodA_macro = wx.Panel(
+            self.comparison_macro,
+            wx.ID_ANY,
+            wx.DefaultPosition,
+            wx.DefaultSize,
+            wx.TAB_TRAVERSAL,
+        )
+        gSizer10.Add(self.comparison_foodA_macro, 1, wx.EXPAND | wx.ALL, 5)
+
+        self.comparison_foodB_macro = wx.Panel(
+            self.comparison_macro,
+            wx.ID_ANY,
+            wx.DefaultPosition,
+            wx.DefaultSize,
+            wx.TAB_TRAVERSAL,
+        )
+        gSizer10.Add(self.comparison_foodB_macro, 1, wx.EXPAND | wx.ALL, 5)
+
+        self.comparison_macro.SetSizer(gSizer10)
+        self.comparison_macro.Layout()
+        gSizer10.Fit(self.comparison_macro)
+        self.comparison_notebook.AddPage(
+            self.comparison_macro, _("Macronutrients"), False
+        )
+
+        comparison_view_wrapper.Add(self.comparison_notebook, 1, wx.EXPAND | wx.ALL, 5)
+
+        self.comparison_panel.SetSizer(comparison_view_wrapper)
+        self.comparison_panel.Layout()
+        comparison_view_wrapper.Fit(self.comparison_panel)
         self.notebook.AddPage(self.comparison_panel, _("Comparison"), False)
 
         bSizer3.Add(self.notebook, 1, wx.EXPAND | wx.ALL, 5)
@@ -789,12 +952,10 @@ class MyFrame3(wx.Frame):
         self.search_filter_level_carb.Bind(wx.EVT_CHOICE, self.search)
         self.search_filter_level_nutri.Bind(wx.EVT_CHOICE, self.search)
         self.search_filter_level_fat.Bind(wx.EVT_CHOICE, self.search)
-        self.search_filter_highProtein.Bind(wx.EVT_CHECKBOX, self.search)
-        self.search_filter_lowSugar.Bind(wx.EVT_CHECKBOX, self.search)
-        self.m_button13.Bind(wx.EVT_BUTTON, self.search)
-        self.m_button14.Bind(wx.EVT_BUTTON, self.resetApp)
-        self.m_button15.Bind(wx.EVT_BUTTON, self.addComparison)
-        self.m_button16.Bind(wx.EVT_BUTTON, self.exitApp)
+        self.search_search_button.Bind(wx.EVT_BUTTON, self.search)
+        self.search_reset_button.Bind(wx.EVT_BUTTON, self.resetApp)
+        self.search_compare_button.Bind(wx.EVT_BUTTON, self.addComparison)
+        self.search_exit_button.Bind(wx.EVT_BUTTON, self.exitApp)
 
     def __del__(self):
         pass

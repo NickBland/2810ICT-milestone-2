@@ -1,5 +1,7 @@
 import wx
 
+import pandas as pd
+
 from gui import MyFrame3 as MyFrame
 from error import ErrorDialog
 from database import initDatabase, searchDatabase, displayResults
@@ -22,6 +24,7 @@ class MyFrame(MyFrame):
 
         # Initialise the currently selected food to be none
         self.currently_selected_food = None
+        self.comparison_list = []
 
         self.Show()
 
@@ -75,8 +78,16 @@ class MyFrame(MyFrame):
 
         # Display the selected food item in the text box
         self.search_result_selected.SetLabel(selected_cell)
-        # Align back to centre (updating value for some reason resets the alignment to left)
-        self.search_result_selected.SetExtraStyle(wx.ALIGN_CENTER_HORIZONTAL)
+
+        # Update the Comparison button label, depending on whether the food item is already in the comparison list
+        if not self.currently_selected_food.empty:
+            selected_food_value = self.currently_selected_food.iloc[0]["food"]
+            if selected_food_value in self.comparison_list:
+                self.search_compare_button.SetLabel("Remove from Comparison")
+            else:
+                self.search_compare_button.SetLabel("Add to Comparison")
+        else:
+            self.search_compare_button.SetLabel("Add to Comparison")
 
     def resetApp(self, event):
         """
@@ -99,12 +110,42 @@ class MyFrame(MyFrame):
         self.search_filter_lowSugar.SetValue(False)  # Low Sugar Checkbox
         self.search_result_selected.SetLabel("No Food Selected")  # Selected Food item
         self.currently_selected_food = None
+        self.comparison_list = []  # Comparison list
 
         # Display all database entries in the grid
         displayResults(DATABASE, self.search_results_grid)
 
+    def addComparison(self, event):
+        """
+        Add the currently selected food item to the comparison list
+        """
+        if self.currently_selected_food is None or self.currently_selected_food.empty:
+            return
+
+        # Extract the relevant value from the DataFrame
+        selected_food_value = self.currently_selected_food.iloc[0]["food"]
+
+        # Add or remove the food item from the comparison list
+        if selected_food_value in self.comparison_list:
+            self.comparison_list.remove(selected_food_value)
+            # Update the label
+            self.search_compare_button.SetLabel("Add to Comparison")
+        else:
+            self.comparison_list.append(selected_food_value)
+            # Update the label
+            self.search_compare_button.SetLabel("Remove from Comparison")
+
     def updatePage(self, event):
-        updateFood(self.currently_selected_food, self)
+        # Convert the comparison list to a DataFrame object
+        comparisonData = pd.DataFrame()
+        for food in self.comparison_list:
+            comparisonData = pd.concat(
+                [comparisonData, DATABASE[DATABASE["food"] == food]]
+            )
+
+        print(comparisonData)
+
+        updateFood(self.currently_selected_food, comparisonData, self)
         return
 
     def exitApp(self, event):

@@ -7,102 +7,137 @@ import matplotlib.pyplot as plt
 matplotlib.use("WXAgg")
 
 
-def updateFood(food, UI):
+def updateFood(food, comparison_list, UI):
     """
     Update the Food Page to display the selected food item
     """
+
+    # Close all matplotlib figures to prevent memory leaks
+    plt.close("all")
+
     # First check that the user has switched to the food_page (Page 1)
-    if UI.notebook.GetSelection() != 1:
-        return
+    if UI.notebook.GetSelection() == 1:
+        if food is None:
+            UI.food_selected_label.SetLabel("No Food Selected")
+            UI.food_none_warning.Show()
+            UI.food_information_grid.Hide()
+            UI.food_information_grid_label.Hide()
+            UI.food_micro_pie.Hide()
+            UI.food_macro_graph.Hide()
+        else:
+            UI.food_none_warning.Hide()
+            UI.food_information_grid_label.Show()
+            UI.food_selected_label.SetLabel(food["food"].values[0])
+            updateGrid(food, UI.food_information_grid)
+            drawPieChart(food, UI.food_micro_pie)
+            drawBarChart(food, UI.food_macro_graph)
+    elif UI.notebook.GetSelection() == 2:
+        if len(comparison_list) == 0:
+            UI.comparison_foodA_name.SetLabel("No Food Selected")
+            UI.comparison_foodB_name.SetLabel("No Food Selected")
+            UI.comparison_foodA_grid.Hide()
+            UI.comparison_foodA_micro.Hide()
+            UI.comparison_foodA_macro.Hide()
+            UI.comparison_foodB_grid.Hide()
+            UI.comparison_foodB_micro.Hide()
+            UI.comparison_foodB_macro.Hide()
+        elif len(comparison_list) == 1:
+            UI.comparison_foodA_name.SetLabel(comparison_list["food"].values[0])
+            UI.comparison_foodB_name.SetLabel("No Food Selected")
+            updateGrid(comparison_list.iloc[:1], UI.comparison_foodA_grid)
+            drawPieChart(comparison_list.iloc[:1], UI.comparison_foodA_micro)
+            drawBarChart(comparison_list.iloc[:1], UI.comparison_foodA_macro)
+            UI.comparison_foodB_grid.Hide()
+            UI.comparison_foodB_micro.Hide()
+            UI.comparison_foodB_macro.Hide()
+        else:
+            UI.comparison_foodA_name.SetLabel(comparison_list["food"].values[0])
+            UI.comparison_foodB_name.SetLabel(comparison_list["food"].values[1])
+            updateGrid(comparison_list.iloc[:1], UI.comparison_foodA_grid)
+            updateGrid(comparison_list.iloc[1:2], UI.comparison_foodB_grid)
+            drawPieChart(comparison_list.iloc[:1], UI.comparison_foodA_micro)
+            drawPieChart(comparison_list.iloc[1:2], UI.comparison_foodB_micro)
+            drawBarChart(comparison_list.iloc[:1], UI.comparison_foodA_macro)
+            drawBarChart(comparison_list.iloc[1:2], UI.comparison_foodB_macro)
 
-    updateGrid(food, UI)
+            # Make sure everything is shown
+            UI.comparison_foodA_grid.Show()
+            UI.comparison_foodA_micro.Show()
+            UI.comparison_foodA_macro.Show()
+            UI.comparison_foodB_grid.Show()
+            UI.comparison_foodB_micro.Show()
+            UI.comparison_foodB_macro.Show()
 
-    drawPieChart(food, UI)
-    drawBarChart(food, UI)
     UI.Layout()  # Update the layout of the page after everything has been rendered
     return
 
 
-def updateGrid(food, UI):
-    # If the food is None, set the text boxes to their default states
-    if food is None:
-        UI.food_selected_label.SetLabel("No Food Selected")
-        UI.food_none_warning.Show()
-        UI.food_information_grid.Hide()
-    else:
-        # Hide the warning label
-        UI.food_none_warning.Hide()
+def updateGrid(food, component):
+    # If the nutrient_percentage column is present, remove it
+    if "nutrient_percentage" in food.columns:
+        food = food.drop(columns=["nutrient_percentage"])
 
-        # Display the food name
-        UI.food_selected_label.SetLabel(food["food"].values[0])
+    # Display the food information as a table
+    # Convert the names of the columns to a row each, and then the value as the second column
+    # Skip the first row, as it contains the food name
+    df = food.T.reset_index().iloc[1:]
 
-        # If the nutrient_percentage column is present, remove it
-        if "nutrient_percentage" in food.columns:
-            food = food.drop(columns=["nutrient_percentage"])
+    df.columns = ["Nutrient Name", "Value"]
 
-        # Display the food information as a table
-        # Convert the names of the columns to a row each, and then the value as the second column
-        # Skip the first row, as it contains the food name
-        df = food.T.reset_index().iloc[1:]
+    # Add the unit to a third column. This will have to be manual unfortunately
+    df["Unit"] = [
+        "kcal",
+        "g",
+        "g",
+        "g",
+        "g",
+        "g",
+        "g",
+        "g",
+        "g",
+        "mg",
+        "g",
+        "g",
+        "mg",
+        "mg",
+        "mg",
+        "mg",
+        "mg",
+        "mg",
+        "mg",
+        "mg",
+        "mg",
+        "mg",
+        "mg",
+        "mg",
+        "mg",
+        "mg",
+        "mg",
+        "mg",
+        "mg",
+        "mg",
+        "mg",
+        "mg",
+        "mg",
+        "N/A",
+    ]
 
-        df.columns = ["Nutrient Name", "Value"]
+    food_information = DataTable(pd.DataFrame(df))
 
-        # Add the unit to a third column. This will have to be manual unfortunately
-        df["Unit"] = [
-            "kcal",
-            "g",
-            "g",
-            "g",
-            "g",
-            "g",
-            "g",
-            "g",
-            "g",
-            "mg",
-            "g",
-            "g",
-            "mg",
-            "mg",
-            "mg",
-            "mg",
-            "mg",
-            "mg",
-            "mg",
-            "mg",
-            "mg",
-            "mg",
-            "mg",
-            "mg",
-            "mg",
-            "mg",
-            "mg",
-            "mg",
-            "mg",
-            "mg",
-            "mg",
-            "mg",
-            "mg",
-            "N/A",
-        ]
+    grid = component
+    grid.SetTable(food_information, True)
+    grid.AutoSizeColumns()
+    grid.HideRowLabels()
 
-        food_information = DataTable(pd.DataFrame(df))
-
-        grid = UI.food_information_grid
-        grid.SetTable(food_information, True)
-        grid.AutoSizeColumns()
-        grid.HideRowLabels()
-
-        grid.Show()
+    grid.Show()
 
 
-def drawPieChart(food, UI):
+def drawPieChart(food, panel_component):
     """
     Draw a pie chart of the vitamin breakdown of the selected food item
     """
-    # If the food is None, set the pie chart to its default state
-    if food is None:
-        UI.food_micro_pie.Hide()
-        return
+
+    print(food)
 
     # Get the micro nutrient values
     vitaminA = food["Vitamin A"].values[0]
@@ -170,27 +205,23 @@ def drawPieChart(food, UI):
     ax.set_title("Vitamin Breakdown")
 
     # Resize chart so it looks nicer
-    h, w = UI.food_micro_pie.GetSize()
+    h, w = panel_component.GetSize()
     fig.set_size_inches(h / fig.get_dpi(), w / fig.get_dpi())
 
     fig.tight_layout()
 
-    canvas = FigureCanvasWxAgg(UI.food_micro_pie, -1, fig)
-    canvas.SetSize(UI.food_micro_pie.GetSize())
+    canvas = FigureCanvasWxAgg(panel_component, -1, fig)
+    canvas.SetSize(panel_component.GetSize())
 
     # Display the pie chart
-    UI.food_micro_pie.Show()
+    panel_component.Show()
     return
 
 
-def drawBarChart(food, UI):
+def drawBarChart(food, panel_component):
     """
     Draw a bar chart of the macronutrient breakdown of the selected food item
     """
-    # If the food is None, set the bar chart to its default state
-    if food is None:
-        UI.food_macro_graph.Hide()
-        return
 
     values = [
         food["Protein"].values[0],
@@ -211,14 +242,14 @@ def drawBarChart(food, UI):
     ax.set_title("Macronutrient Breakdown")
 
     # Resize chart so it looks nicer
-    h, w = UI.food_macro_graph.GetSize()
+    h, w = panel_component.GetSize()
     fig.set_size_inches(h / fig.get_dpi(), w / fig.get_dpi())
 
     fig.tight_layout()
 
-    canvas = FigureCanvasWxAgg(UI.food_macro_graph, -1, fig)
-    canvas.SetSize(UI.food_macro_graph.GetSize())
+    canvas = FigureCanvasWxAgg(panel_component, -1, fig)
+    canvas.SetSize(panel_component.GetSize())
 
     # Display the bar chart
-    UI.food_macro_graph.Show()
+    panel_component.Show()
     return
