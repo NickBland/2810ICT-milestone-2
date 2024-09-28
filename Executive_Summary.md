@@ -15,12 +15,14 @@ The Food Search feature allows users to quickly find comprehensive nutritional i
 1. Begin typing the name of the food item in the search bar.
 2. When the desired item appears in the list, double-click on it to select.
 3. Click on the "View Data" button to display the detailed nutritional information for the selected food.
+4. Click the "Food" tab to view the nutritional information
 
 ### Screenshots
 Include screenshots for each step demonstrating the use of this feature.  
 ![Step 1](![img.png](img.png))
 ![Step 2](![img_1.png](img_1.png))
 ![Step 3](![img_2.png](img_2.png))
+![Step 3](![img_3.png](img_3.png))
 
 ---
 
