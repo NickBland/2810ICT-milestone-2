@@ -4,6 +4,8 @@ import matplotlib
 from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg
 import matplotlib.pyplot as plt
 
+from error import ErrorDialog
+
 matplotlib.use("WXAgg")
 
 
@@ -55,10 +57,10 @@ def updateFood(food, comparison_list, UI):
             UI.comparison_foodB_name.SetLabel(comparison_list["food"].values[1])
             updateGrid(comparison_list.iloc[:1], UI.comparison_foodA_grid)
             updateGrid(comparison_list.iloc[1:2], UI.comparison_foodB_grid)
-            drawPieChart(comparison_list.iloc[:1], UI.comparison_foodA_micro)
-            drawPieChart(comparison_list.iloc[1:2], UI.comparison_foodB_micro)
             drawBarChart(comparison_list.iloc[:1], UI.comparison_foodA_macro)
             drawBarChart(comparison_list.iloc[1:2], UI.comparison_foodB_macro)
+            drawPieChart(comparison_list.iloc[:1], UI.comparison_foodA_micro)
+            drawPieChart(comparison_list.iloc[1:2], UI.comparison_foodB_micro)
 
             # Make sure everything is shown
             UI.comparison_foodA_grid.Show()
@@ -183,6 +185,15 @@ def drawPieChart(food, panel_component):
         "K",
     ]
 
+    # If all values are 0, don't draw the chart
+    if sum(values) == 0:
+        ErrorDialog(
+            panel_component.GetParent(),
+            "This food has no micronutrient information. Skipping Piechart!",
+            False,  # Non-fatal error, continue execution
+        )
+        return
+
     # Remove any vitamins that are 0
     values, types = zip(*[(v, t) for v, t in zip(values, types) if v != 0])
 
@@ -229,6 +240,14 @@ def drawBarChart(food, panel_component):
         food["Fat"].values[0],
         food["Sugars"].values[0],
     ]
+
+    if sum(values) == 0:
+        ErrorDialog(
+            panel_component.GetParent(),
+            "This food has no macronutrient information. Skipping Bar Graph!",
+            False,  # Non-fatal error, continue execution
+        )
+        return
 
     labels = ["Protein", "Carbs", "Fat", "Sugars"]
 
