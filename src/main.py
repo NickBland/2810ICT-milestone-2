@@ -3,6 +3,7 @@ import wx
 from gui import MyFrame3 as MyFrame
 from error import ErrorDialog
 from database import initDatabase, searchDatabase, displayResults
+from food import updateFood
 
 # Global variables
 DATABASE = None  # Global database object - Pandas.DataFrame object
@@ -45,14 +46,13 @@ class MyFrame(MyFrame):
             "level-sugar": self.search_filter_level_sugar.GetSelection(),
             "level-carb": self.search_filter_level_carb.GetSelection(),
             "level-fat": self.search_filter_level_fat.GetSelection(),
-            "level-nutri": self.search_filter_level_nutri.GetSelection(),            
+            "level-nutri": self.search_filter_level_nutri.GetSelection(),
             "low-sugar": self.search_filter_lowSugar.GetValue(),
-            "high-protein": self.search_filter_highProtein.GetValue()
+            "high-protein": self.search_filter_highProtein.GetValue(),
         }
 
         results = searchDatabase(search_filters, DATABASE)
         displayResults(results, self.search_results_grid)
-
 
     def selectFood(self, event):
         """
@@ -75,32 +75,43 @@ class MyFrame(MyFrame):
 
         # Display the selected food item in the text box
         self.search_result_selected.SetLabel(selected_cell)
+        # Align back to centre (updating value for some reason resets the alignment to left)
+        self.search_result_selected.SetExtraStyle(wx.ALIGN_CENTER_HORIZONTAL)
 
     def resetApp(self, event):
         """
         Reset the app, (search keyword, filters etc.)
         """
-        self.search_keyword_input.SetLabel('') # Search
-        self.search_filter_nutrient_selection.SetSelection(0) # Nutrients
-        self.search_filter_range_min.SetValue('') # range min
-        self.search_filter_range_max.SetValue('') # range max 
+        self.search_keyword_input.SetLabel("")  # Search
+        self.search_filter_nutrient_selection.SetSelection(0)  # Nutrients
+        self.search_filter_range_min.SetValue("")  # range min
+        self.search_filter_range_max.SetValue("")  # range max
 
-        self.search_filter_level_protein.SetSelection(0) 
+        self.search_filter_level_protein.SetSelection(0)
         self.search_filter_level_carb.SetSelection(0)
-        self.search_filter_level_fat.SetSelection(0)     # Nutrition level (N/A, Low, Mid, High)
+        self.search_filter_level_fat.SetSelection(
+            0
+        )  # Nutrition level (N/A, Low, Mid, High)
         self.search_filter_level_sugar.SetSelection(0)
         self.search_filter_level_nutri.SetSelection(0)
-        
-        self.search_filter_highProtein.SetValue(False) # High Protein Checkbox
-        self.search_filter_lowSugar.SetValue(False) # Low Sugar Checkbox
-        self.search_result_selected.SetLabel('No Food Selected') # Selected Food item
-        self.currently_selected_food = None 
+
+        self.search_filter_highProtein.SetValue(False)  # High Protein Checkbox
+        self.search_filter_lowSugar.SetValue(False)  # Low Sugar Checkbox
+        self.search_result_selected.SetLabel("No Food Selected")  # Selected Food item
+        self.currently_selected_food = None
+
+        # Display all database entries in the grid
+        displayResults(DATABASE, self.search_results_grid)
+
+    def updatePage(self, event):
+        updateFood(self.currently_selected_food, self)
+        return
 
     def exitApp(self, event):
         """
         Exit the application
         """
-        self.Close()
+        self.Destroy()
 
 
 # Run the WX application

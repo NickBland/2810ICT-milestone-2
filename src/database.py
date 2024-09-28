@@ -3,6 +3,7 @@ import pandas as pd
 # import wx.grid
 from datatable import DataTable
 
+
 def initDatabase(filePath: str):
     """
     Initialize the database object with the given file path
@@ -29,7 +30,8 @@ def initDatabase(filePath: str):
     # Return the result
     return result, None
 
-# Function for searching the dataframe. 
+
+# Function for searching the dataframe.
 def searchDatabase(filters: dict, database: pd.DataFrame):
     print(filters)
     print(database)
@@ -80,7 +82,6 @@ def searchDatabase(filters: dict, database: pd.DataFrame):
             (filtered_db[nutrient] >= min_value) & (filtered_db[nutrient] <= max_value)
         ]
 
-
     # resist the auto-filter!
 
     # Checks and filters table depending on what is selected.
@@ -96,17 +97,16 @@ def searchDatabase(filters: dict, database: pd.DataFrame):
     if level_nutri:
         filtered_db = checkFilters(filtered_db, level_nutri, "Nutrition Density")
 
-    # Filters, Checkboxes (Other)     
-    if high_protein == True:
+    # Filters, Checkboxes (Other)
+    if high_protein:
         filtered_db = filterHigh(filtered_db, "Protein")
-    if low_sugar == True:
+    if low_sugar:
         filtered_db = filterLow(filtered_db, "Sugars")
     return filtered_db
 
+
 # Check which filter we are using
-def checkFilters(
-    database: pd.DataFrame, filters: int, nutrient: str 
-):
+def checkFilters(database: pd.DataFrame, filters: int, nutrient: str):
     if filters == 1:
         database = filterLow(database, nutrient)
     elif filters == 2:
@@ -116,6 +116,7 @@ def checkFilters(
 
     return database
 
+
 # (Low) Filter the nutrient based on if it is < 33% of the max value.
 def filterLow(database: pd.DataFrame, nutrient: str):
     max_value = database[nutrient].max()
@@ -123,21 +124,25 @@ def filterLow(database: pd.DataFrame, nutrient: str):
     database = database[database[nutrient] < max_value]
     return database
 
+
 # (Mid) Filter the nutrient based on if it is >= 33% and < 66% of the max value.
 def filterMid(database: pd.DataFrame, nutrient: str):
     max_value = database[nutrient].max()
     min_value = 0.33 * max_value
     max_value = 0.66 * max_value
-    database = database[(database[nutrient] >= min_value) & (database[nutrient] < max_value)]
+    database = database[
+        (database[nutrient] >= min_value) & (database[nutrient] < max_value)
+    ]
     return database
+
 
 # (High) Filter the nutrient based on if it is > 66% of the max value.
 def filterHigh(database: pd.DataFrame, nutrient: str):
-
     max_value = database[nutrient].max()
     max_value = 0.66 * max_value
     database = database[database[nutrient] > max_value]
     return database
+
 
 def displayResults(database: pd.DataFrame, grid):
     # Clear the grid
