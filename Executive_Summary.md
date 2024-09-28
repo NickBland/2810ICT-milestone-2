@@ -18,7 +18,7 @@ The Food Search feature allows users to quickly find comprehensive nutritional i
 
 ### Screenshots
 Include screenshots for each step demonstrating the use of this feature.  
-![Step 1](![img.png](img.png))
+![Step 1](![img.png](./Nutrition_Breakdown_screenshot_3_.png))
 ![Step 2](![img_1.png](img_1.png))
 ![Step 3](![img_3.png](img_3.png))
 
@@ -35,9 +35,9 @@ The Nutrition Breakdown allows users to select a food item and generate visualiz
 
 ### Screenshots
 Include screenshots for each step demonstrating the use of this feature.  
-![1](![Nutrition Breakdown screenshot 1.png](Nutrition%20Breakdown%20screenshot%201.png)))
-![2](![Nutrition Breakdown screenshot 2 .png](Nutrition%20Breakdown%20screenshot%202%20.png)))
-![3](![Nutrition Breakdown screenshot 3 .png](Nutrition%20Breakdown%20screenshot%203%20.png))
+[1]![Nutrition Breakdown screenshot 1.png](./Nutrition_Breakdown_screenshot_3_.png)
+[2]![Nutrition_Breakdown_screenshot_2.png](./Nutrition_Breakdown_screenshot_3_.png)
+[3]![Nutrition_Breakdown_screenshot_3.png](./Nutrition_Breakdown_screenshot_3_.png)
 
 ---
 
