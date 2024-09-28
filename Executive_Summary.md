@@ -14,31 +14,30 @@ The Food Search feature allows users to quickly find comprehensive nutritional i
 ### Steps
 1. Begin typing the name of the food item in the search bar.
 2. When the desired item appears in the list, double-click on it to select.
-3. Click on the "View Data" button to display the detailed nutritional information for the selected food.
-4. Click the "Food" tab to view the nutritional information
+3. Click the "Food" tab to view the nutritional information on the right hand side. 
 
 ### Screenshots
 Include screenshots for each step demonstrating the use of this feature.  
 ![Step 1](![img.png](img.png))
 ![Step 2](![img_1.png](img_1.png))
-![Step 3](![img_2.png](img_2.png))
-![Step 4](![img_3.png](img_3.png))
+![Step 3](![img_3.png](img_3.png))
 
 ---
 
-## 2. [Feature 2 Name]
+## 2. Nutrition Breakdown
 ### Description  
-Briefly describe what this feature does.
+The Nutrition Breakdown allows users to select a food item and generate visualizations such as pie charts and bar graphs which will show the breakdown of different nutrients.
 
 ### Steps
 1. Begin typing the name of the food item in the search bar. 
 2. When the desired item appears in the list, double-click on it to select.
-3. Click on the "View Data" button to display the detailed nutritional information for the selected food.
+3. Click the "Food" tab to view the pie charts and bar graphs of the selected foods on the left and middle of the page.
+
 ### Screenshots
 Include screenshots for each step demonstrating the use of this feature.  
-![1](./visual_design.png)
-
-![2](./visual_design.png)
+![1](![Nutrition Breakdown screenshot 1.png](Nutrition%20Breakdown%20screenshot%201.png)))
+![2](![Nutrition Breakdown screenshot 2 .png](Nutrition%20Breakdown%20screenshot%202%20.png)))
+![3](![Nutrition Breakdown screenshot 3 .png](Nutrition%20Breakdown%20screenshot%203%20.png))
 
 ---
 
