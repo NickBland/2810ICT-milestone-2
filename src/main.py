@@ -50,8 +50,6 @@ class MyFrame(MyFrame):
             "level-carb": self.search_filter_level_carb.GetSelection(),
             "level-fat": self.search_filter_level_fat.GetSelection(),
             "level-nutri": self.search_filter_level_nutri.GetSelection(),
-            "low-sugar": self.search_filter_lowSugar.GetValue(),
-            "high-protein": self.search_filter_highProtein.GetValue(),
         }
 
         results = searchDatabase(search_filters, DATABASE)
@@ -106,8 +104,6 @@ class MyFrame(MyFrame):
         self.search_filter_level_sugar.SetSelection(0)
         self.search_filter_level_nutri.SetSelection(0)
 
-        self.search_filter_highProtein.SetValue(False)  # High Protein Checkbox
-        self.search_filter_lowSugar.SetValue(False)  # Low Sugar Checkbox
         self.search_result_selected.SetLabel("No Food Selected")  # Selected Food item
         self.currently_selected_food = None
         self.comparison_list = []  # Comparison list
