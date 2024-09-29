@@ -127,6 +127,48 @@ def test_searchDatabase_with_all_filters(fetch_real_data):
     assert result.iloc[0]["food"] == "tapioca pearls"
 
 
+def test_searchDatabase_with_low_protein(fetch_real_data):
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+    filters = {
+        "level-protein": 1,
+    }
+    result = searchDatabase(filters, df)
+    assert len(result) == 2383
+    assert result.iloc[0]["food"] == "cream cheese"
+
+
+def test_searchDatabase_with_mid_protein(fetch_real_data):
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+    filters = {
+        "level-protein": 2,
+    }
+    result = searchDatabase(filters, df)
+    assert len(result) == 7
+    assert result.iloc[0]["food"] == "pork backribs raw"
+
+
+def test_searchDatabase_with_high_protein(fetch_real_data):
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+    filters = {
+        "level-protein": 3,
+    }
+    result = searchDatabase(filters, df)
+    assert len(result) == 5
+    assert result.iloc[0]["food"] == "pork top loin roasts raw"
+
+
+def test_searchDatabase_with_no_filters(fetch_real_data):
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+    filters = {}
+    result = searchDatabase(filters, df)
+    assert len(result) == 2396
+    assert result.iloc[0]["food"] == "cream cheese"
+
+
 def test_displayResults(fetch_real_data, mocker):
     data = fetch_real_data
     df = pd.DataFrame(data)

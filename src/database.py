@@ -100,11 +100,12 @@ def searchDatabase(filters: dict, database: pd.DataFrame):
 
 # Check which filter we are using
 def checkFilters(database: pd.DataFrame, filters: int, nutrient: str):
+    print(f"filters: {filters}, type: {type(filters)}")  # Debugging line
     if filters == 1:
         database = filterLow(database, nutrient)
     elif filters == 2:
         database = filterMid(database, nutrient)
-    elif filters == 3:
+    else:
         database = filterHigh(database, nutrient)
 
     return database
