@@ -59,13 +59,14 @@ Include screenshots for each step demonstrating the use of this feature.
 
 ---
 
-## 4. [Feature 4 Name]
+## 4. Nutrition Level Filter
 ### Description  
-Briefly describe what this feature does.
+The system allows users to filter foods based on predefined nutritional levels (low, mid, high) for specific nutrients, including fat, protein, carbohydrates, sugar, and nutritional density.
 
 ### Steps
-1. Step-by-step instructions for using this feature.
-2. Add additional steps as needed.
+1. Just click on the nutrition desired to filter by and select (Low, Mid or High).
+2. For either high Protein or Low sugar just tick the desired box.
+3. All results will appear on the left-hand side of the screen.
 
 ### Screenshots
 Include screenshots for each step demonstrating the use of this feature.    
@@ -76,9 +77,9 @@ Include screenshots for each step demonstrating the use of this feature.
 
 ---
 
-## 5. [Feature 5 Name]
+## 5. food comparison
 ### Description  
-Briefly describe what this feature does.
+The system allows users to select multiple foods and generate side by side comparisons of their nutritional content.
 
 ### Steps
 1. Step-by-step instructions for using this feature.
