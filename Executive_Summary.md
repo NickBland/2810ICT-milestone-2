@@ -17,10 +17,10 @@ The Food Search feature allows users to quickly find comprehensive nutritional i
 3. Click the "Food" tab to view the nutritional information on the right hand side. 
 
 ### Screenshots
-Include screenshots for each step demonstrating the use of this feature.  
-![Step 1](![Search_screenshot_1.png](Executive_summary_screenshots%2FSearch_screenshot_1.png))
-![Step 2](![img_1.png](img_1.png))
-![Step 3](![img_3.png](img_3.png))
+Screenshots for each step demonstrating the use of this feature.  
+[Step 1]![Search_screenshot_1.png](Executive_summary_screenshots%2FSearch_screenshot_1.png)
+[Step 2]![Search_screenshot_2.png](Executive_summary_screenshots%2FSearch_screenshot_2.png)
+[Step 3]![Search_screenshot_3.png](Executive_summary_screenshots%2FSearch_screenshot_3.png)
 
 ---
 
@@ -35,9 +35,9 @@ The Nutrition Breakdown allows users to select a food item and generate visualiz
 
 ### Screenshots
 Include screenshots for each step demonstrating the use of this feature.  
-[1]![Nutrition Breakdown Screenshot 1](./Executive_summary_screenshots/Nutrition_Breakdown_screenshot_1.png)
-[2]![Nutrition Breakdown Screenshot 2](./Executive_summary_screenshots/Nutrition_Breakdown_screenshot_2.png)
-[3]![Nutrition Breakdown Screenshot 3](./Executive_summary_screenshots/Nutrition_Breakdown_screenshot_3.png)
+[Step 1]![Nutrition Breakdown Screenshot 1](./Executive_summary_screenshots/Nutrition_Breakdown_screenshot_1.png)
+[Step 2]![Nutrition Breakdown Screenshot 2](./Executive_summary_screenshots/Nutrition_Breakdown_screenshot_2.png)
+[Step 3]![Nutrition Breakdown Screenshot 3](./Executive_summary_screenshots/Nutrition_Breakdown_screenshot_3.png)
 
 ---
 
