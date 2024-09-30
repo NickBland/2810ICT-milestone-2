@@ -17,10 +17,10 @@ The Food Search feature allows users to quickly find comprehensive nutritional i
 3. Click the "Food" tab to view the nutritional information on the right hand side. 
 
 ### Screenshots
-Screenshots for each step demonstrating the use of this feature.  
-[Step 1]![Search_screenshot_1.png](Executive_summary_screenshots%2FSearch_screenshot_1.png)
-[Step 2]![Search_screenshot_2.png](Executive_summary_screenshots%2FSearch_screenshot_2.png)
-[Step 3]![Search_screenshot_3.png](Executive_summary_screenshots%2FSearch_screenshot_3.png)
+Screenshots for each step demonstrating the use of the Food Search.  
+[Step 1]![Search_screenshot_1.png](Executive%20summary%20screenshots%2FSearch_screenshot_1.png)
+[Step 2]![Search_screenshot_2.png](Executive%20summary%20screenshots%2FSearch_screenshot_2.png)
+[Step 3]![Search_screenshot_3.png](Executive%20summary%20screenshots%2FSearch_screenshot_3.png)
 
 ---
 
@@ -34,10 +34,10 @@ The Nutrition Breakdown allows users to select a food item and generate visualiz
 3. Click the "Food" tab to view the pie charts and bar graphs of the selected foods on the left and middle of the page.
 
 ### Screenshots
-Include screenshots for each step demonstrating the use of this feature.  
-[Step 1]![Nutrition Breakdown Screenshot 1](./Executive_summary_screenshots/Nutrition_Breakdown_screenshot_1.png)
-[Step 2]![Nutrition Breakdown Screenshot 2](./Executive_summary_screenshots/Nutrition_Breakdown_screenshot_2.png)
-[Step 3]![Nutrition Breakdown Screenshot 3](./Executive_summary_screenshots/Nutrition_Breakdown_screenshot_3.png)
+Screenshots for each step demonstrating the use of the Nutrition Breakdown.
+[Step 1]![Nutrition_Breakdown_screenshot_1.png](Executive%20summary%20screenshots%2FNutrition_Breakdown_screenshot_1.png)
+[Step 2]![Nutrition_Breakdown_screenshot_2.png](Executive%20summary%20screenshots%2FNutrition_Breakdown_screenshot_2.png)
+[Step 3]![Nutrition_Breakdown_screenshot_3.png](Executive%20summary%20screenshots%2FNutrition_Breakdown_screenshot_3.png)
 
 ---
 
@@ -51,10 +51,11 @@ The system shall allow users to select a nutritional category (eg protein or fat
 3. The foods that fit within the nutrients range will appear on the left-hand side of the page.
 
 ### Screenshots
-Include screenshots for each step demonstrating the use of this feature.    
-![1](./visual_design.png)
+Screenshots for each step demonstrating the use of the Nutrition Range Filter.    
+[Step 1]![Nutrition_Range_Filter_1.png](Executive%20summary%20screenshots%2FNutrition_Range_Filter_1.png)
+[Step 2]![Nutrition_Range_Filter_2.png](Executive%20summary%20screenshots%2FNutrition_Range_Filter_2.png)
+[Step 3]![Nutrition_Range_Filter_3.png](Executive%20summary%20screenshots%2FNutrition_Range_Filter_3.png)
 
-![2](./visual_design.png)
 
 
 ---
@@ -69,10 +70,10 @@ The system allows users to filter foods based on predefined nutritional levels (
 3. All results will appear on the left-hand side of the screen.
 
 ### Screenshots
-Include screenshots for each step demonstrating the use of this feature.    
-![1](./visual_design.png)
-
-![2](./visual_design.png)
+Screenshots for each step demonstrating the use of the Nutrition Level Filter.    
+[Step 1]![Nutrition_Level_Filter_1.png](Executive%20summary%20screenshots%2FNutrition_Level_Filter_1.png)
+[Step 2]![Nutrition_Level_Filter_2.png](Executive%20summary%20screenshots%2FNutrition_Level_Filter_2.png)
+[Step 3]![Nutrition_Level_Filter_3.png](Executive%20summary%20screenshots%2FNutrition_Level_Filter_3.png)
 
 
 ---
@@ -87,10 +88,10 @@ The system allows users to select multiple foods and generate side by side compa
 3. Next press the comparison tab to see the nutritional comparison.
 4. You can also click the Micronutrients and the Macronutrients to see graphs of the Micronutrients and the Macronutrients.
 ### Screenshots
-Include screenshots for each step demonstrating the use of this feature.    
-![1](./visual_design.png)
-
-![2](./visual_design.png)
-
+Screenshots for each step demonstrating the use of the Food Comparison tool.    
+[Step 1]![Food_comparison_1.png](Executive%20summary%20screenshots%2FFood_comparison_1.png)
+[Step 2]![Food_comparison_2.png](Executive%20summary%20screenshots%2FFood_comparison_2.png)
+[Step 3]![Food_comparison_3.png](Executive%20summary%20screenshots%2FFood_comparison_3.png)
+[Step 4]![Food_comparison_4.png](Executive%20summary%20screenshots%2FFood_comparison_4.png)
 
 ---
