@@ -41,13 +41,14 @@ Include screenshots for each step demonstrating the use of this feature.
 
 ---
 
-## 3. [Feature 3 Name]
+## 3. Nutrition Range Filter
 ### Description  
-Briefly describe what this feature does.
+The system shall allow users to select a nutritional category (eg protein or fat) and specify a range (minimum and maximum values). The tool then displays foods that fall within the selected range.
 
 ### Steps
-1. Step-by-step instructions for using this feature.
-2. Add additional steps as needed.
+1. Select the type of nutrients. 
+2. Type the Min and Max range of the nutrients.
+3. The foods that fit within the nutrients range will appear on the left-hand side of the page.
 
 ### Screenshots
 Include screenshots for each step demonstrating the use of this feature.    
