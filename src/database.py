@@ -1,6 +1,7 @@
 import pandas as pd
 
-# import wx.grid
+import wx
+import wx.grid  # Required for tests to pass
 from datatable import DataTable
 
 
@@ -50,9 +51,6 @@ def searchDatabase(filters: dict, database: pd.DataFrame):
     level_carb = filters.get("level-carb", 0)
     level_fat = filters.get("level-fat", 0)
     level_nutri = filters.get("level-nutri", 0)
-    # Other (Checkboxes):
-    high_protein = filters.get("high-protein", False)
-    low_sugar = filters.get("low-sugar", False)
 
     # Filter the dataframe based on the keyword entered in the search bar.
     if keyword:
@@ -97,21 +95,17 @@ def searchDatabase(filters: dict, database: pd.DataFrame):
     if level_nutri:
         filtered_db = checkFilters(filtered_db, level_nutri, "Nutrition Density")
 
-    # Filters, Checkboxes (Other)
-    if high_protein:
-        filtered_db = filterHigh(filtered_db, "Protein")
-    if low_sugar:
-        filtered_db = filterLow(filtered_db, "Sugars")
     return filtered_db
 
 
 # Check which filter we are using
 def checkFilters(database: pd.DataFrame, filters: int, nutrient: str):
+    print(f"filters: {filters}, type: {type(filters)}")  # Debugging line
     if filters == 1:
         database = filterLow(database, nutrient)
     elif filters == 2:
         database = filterMid(database, nutrient)
-    elif filters == 3:
+    else:
         database = filterHigh(database, nutrient)
 
     return database
