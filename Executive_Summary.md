@@ -82,9 +82,10 @@ Include screenshots for each step demonstrating the use of this feature.
 The system allows users to select multiple foods and generate side by side comparisons of their nutritional content.
 
 ### Steps
-1. Step-by-step instructions for using this feature.
-2. Add additional steps as needed.
-
+1. Double-click the first food you want to compare then click Add to comparison.  
+2. Then do the same for the second food you want to compare.
+3. Next press the comparison tab to see the nutritional comparison.
+4. You can also click the Micronutrients and the Macronutrients to see graphs of the Micronutrients and the Macronutrients.
 ### Screenshots
 Include screenshots for each step demonstrating the use of this feature.    
 ![1](./visual_design.png)
