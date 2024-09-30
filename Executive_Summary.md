@@ -70,8 +70,8 @@ The system allows users to filter foods based on predefined nutritional levels (
 
 ### Screenshots
 Screenshots for each step demonstrating the use of the Nutrition Level Filter.    
-[Step 1]![Nutrition_Level_Filter_1.png](Executive%20summary%20screenshots%2FNutrition_Level_Filter_1.png)
-[Step 2]![Nutrition_Level_Filter_3.png](Executive%20summary%20screenshots%2FNutrition_Level_Filter_3.png)
+[Step 1]![Nutrition_Level_Filter_2.1.png](Executive%20summary%20screenshots%2FNutrition_Level_Filter_2.1.png)
+[Step 2]![Nutrition_Level_Filter_2.2.png](Executive%20summary%20screenshots%2FNutrition_Level_Filter_2.2.png)
 
 
 ---
