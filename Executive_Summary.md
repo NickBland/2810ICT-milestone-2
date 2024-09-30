@@ -66,14 +66,12 @@ The system allows users to filter foods based on predefined nutritional levels (
 
 ### Steps
 1. Just click on the nutrition desired to filter by and select (Low, Mid or High).
-2. For either high Protein or Low sugar just tick the desired box.
-3. All results will appear on the left-hand side of the screen.
+2. All results will appear on the left-hand side of the screen.
 
 ### Screenshots
 Screenshots for each step demonstrating the use of the Nutrition Level Filter.    
 [Step 1]![Nutrition_Level_Filter_1.png](Executive%20summary%20screenshots%2FNutrition_Level_Filter_1.png)
-[Step 2]![Nutrition_Level_Filter_2.png](Executive%20summary%20screenshots%2FNutrition_Level_Filter_2.png)
-[Step 3]![Nutrition_Level_Filter_3.png](Executive%20summary%20screenshots%2FNutrition_Level_Filter_3.png)
+[Step 2]![Nutrition_Level_Filter_3.png](Executive%20summary%20screenshots%2FNutrition_Level_Filter_3.png)
 
 
 ---
