@@ -1,3 +1,7 @@
+<style>
+    r { color: Red; }
+</style>
+
 # Project Plan
 
 ## Project Name: FoodDB
@@ -18,12 +22,15 @@ Please Describe what you have accomplished in this group project.
 
 - S5384822, Kane Bebb
   - Accomplishments: In the project plan section, I created the [Project Objectives](#11-project-objectives) and [Project Scope](#13-project-scope) sections. In the software design doc I created the [Problem Background](./Software%20Design%20Document.md#11-problem-background), [System Capabilities/Overview](./Software%20Design%20Document.md#12-system-capabilitiesoverview), [Benefit Analysis](./Software%20Design%20Document.md#13-benefit-analysis), and [Visual Design](./Software%20Design%20Document.md#42-visual-design) sections. I also collaborated with Nick to complete the [Structural Design](./Software%20Design%20Document.md#41-structural-design).
+  - <r> For Milestone 2, I worked on the implementation of the search features, including all the filters required to display results. I also worked on updating the User Interface to reflect the requirements of these filters from what Nick had already created.</r>
 - s5350818, Nick Bland
   - In the project plan section, I created the [WBS](#2-work-breakdown-structure), [Activity Definitions](#3-activity-definition-estimation), and [Gantt Chart](#4-gantt-chart).
-  - In the software design section, I created the [Software Design and System Components](./Software%20Design%20Document.md#3-software-design-and-system-components) as well as collaborating on the [Structural Design](./Software%20Design%20Document.md#41-structural-design) for the project.
+  - In the software design section, I created the [Software Design and System Components](./Software%20Design%20Document.md#3-software-design-and-system-components) as well as collaborating on the [Structural Design](./Software%20Design%20Document.md#41-structural-design) for the project. 
+  - <r>For Milestone 2, I created the User interface for most components. I also worked on implementing the food screen and comparison panel to display more in-depth information about foods selected.</r>
 - s5403634, Cameron Cassar
   - In the software design section, I created the [Requirements](./Software%20Design%20Document.md#2-requirements), [User Requirements](./Software%20Design%20Document.md#21-user-requirements), [Software Requirements](./Software%20Design%20Document.md#22-software-requirements), [Use Case Diagrams](./Software%20Design%20Document.md#23-use-case-diagram), [Use Cases](./Software%20Design%20Document.md#24-use-cases),
   - In the project plan section, I created the [Project Stakeholders](#12-project-stakeholders).
+  - <r>For Milestone 2, I worked on documentation and updates to previously made documentation in Milestone 1.</r>
   
 ## Table of Contents
 
@@ -110,31 +117,36 @@ Additional Stakeholders:
 <!-- Kane -->
 ### 1.3 Project Scope
 
-<ins>_Scope Overview_: </ins><br>
+#### Scope Overview
+
 The **'Scope'** of the project refers to the **features** and **goals** that we will include and feel is reasonable to complete within the **projects time-frame**. By outlining these **tasks** and **goals** ahead of time we enable ourselves to stay on track and focus on core features and set clear expectations for stakeholders.  
 
-<ins>_Scope Inclusions_: </ins><br>
-**What are Inclusions?**<br>
-Inclusions encompass the tasks of the project that are included in the **scope** and are key aspects of the project that are to be completed within the agreed upon **time-frame**. <br>
+#### Scope Inclusions
 
-- Data Input
-- Data manipulation
-- Data output / display
-- Food search
-- Nutrition Breakdown
-- Nutrition Range Filter
-- Nutrition Level Filter
-- Food Comparison
+**What are Inclusions?**
 
-<ins>_Scope Exclusions_: </ins><br>
-**What are Exclusions?**<br>
-Exclusions encompass possible tasks and goals of the project that are **not** main **objectives/tasks** to be completed within the projects **time-frame**.<br>
+Inclusions encompass the tasks of the project that are included in the **scope** and are key aspects of the project that are to be completed within the agreed upon **time-frame**.
 
-- Data share feature
-- Online cloud data storage/hosting
-- Customisable UI
-- Persistent User account
-- Persistent data storage
+- Data Input - <r>The application should be able to accept data from a csv file
+- Data manipulation - <r> The application should be able to manipulate the data to a more human-readable format
+- Data output / display - <r> The application should be able to display the data in interesting ways (graphs etc.)
+- Food search - <r> The user should be able to search for foods using keywords
+- Nutrition Breakdown - <r> The user should be able to see a breakdown of the nutritional information of a food
+- Nutrition Range Filter - <r> The user should be able to filter foods based on a range of nutritional values (e.g. calories: 50-100)
+- Nutrition Level Filter - <r> The user should be able to filter foods based on a nutritional level (e.g. high protein)
+- Food Comparison - <r> The user should be able to compare the nutritional information of two foods
+
+##### Scope Exclusions
+
+**What are Exclusions?**
+
+Exclusions encompass possible tasks and goals of the project that are **not** main **objectives/tasks** to be completed within the projects **time-frame**.
+
+- Data share feature - <r> The application will not have a feature to share data with other users
+- Online cloud data storage/hosting - <r> The application will not have a feature to store data online
+- Customisable UI - <r> The application will not have a feature to customise the UI
+- Persistent User account - <r> The application will not have a feature to store user data, or save associated information
+- Persistent data storage - <r> The application will not have a feature to store data between sessions
 
 <!-- Nick -->
 ## 2. Work Breakdown Structure
@@ -197,3 +209,4 @@ The following table defines the activities planned out in the [WBS](#2-work-brea
 The Gantt Chart is used to show current developmental progress on the project. It uses the planned activities from [Section 3](#3-activity-definition-estimation), which in turn were developed in [Section 2](#2-work-breakdown-structure).
 
 ![Gantt Chart](./Gantt_chart.png)
+<r>Updated Gantt Chart to reflex activities that have been completed in both Milestone 1 and Milestone 2. Importantly, the closing process was not a part of this assessment</r>
