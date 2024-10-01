@@ -1,3 +1,7 @@
+<style>
+    r { color: Red; }
+</style>
+
 # Software Design Document
 
 ## Project Name: FoodDB
@@ -171,6 +175,7 @@ Provide a system-level Use Case Diagram illustrating all required features.
 
 Example:  
 ![Use Case Diagram](./UCD.png)
+<r>Extended Diagram to show 'Data Visualisation' isntead of 'Bar Charts/Graphs' as per feedback given in Milestone 1</r>
 
 ### 2.4 Use Cases
 
