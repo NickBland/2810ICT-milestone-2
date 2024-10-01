@@ -1,3 +1,7 @@
+<style>
+    r { color: Red; }
+</style>
+
 # Software Design Document
 
 ## Project Name: FoodDB
@@ -171,6 +175,7 @@ Provide a system-level Use Case Diagram illustrating all required features.
 
 Example:  
 ![Use Case Diagram](./UCD.png)
+<r>Extended Diagram to show 'Data Visualisation' isntead of 'Bar Charts/Graphs' as per feedback given in Milestone 1</r>
 
 ### 2.4 Use Cases
 
@@ -265,10 +270,17 @@ def initDatabase(filePath):
 
 ##### 3.2.3.2 searchDatabase()
 
+<r>Update to include the checkFilters() function</r>
+
 ```python
 def searchDatabase(foodName, filters OPTIONAL):
   foodList = [] # Empty list to return
   IF filters EXISTS
+    FOR EACH FILTER in filters
+      IF filter IS NOT 0
+        DATABASE = CALL checkFilters(filters) # Update the database with the filters
+      ENDIF
+    ENDFOR
     FOR EACH ROW IN DATABASE
       IF foodName IN ROW && FILTERS MATCH ROW
         foodlist.append(CALL retrieveNutrients(ROW))
@@ -290,121 +302,126 @@ def searchDatabase(foodName, filters OPTIONAL):
   ENDIF
 ```
 
-##### 3.2.3.3 retrieveNutrients()
+##### 3.2.3.3 checkFilters()
+
+<r>Update to include the filterLow(), filterMid(), and filterHigh() functions</r>
 
 ```python
-def retrieveNutrients(food):
-  # Since we already know the food exists, we can search with the exact name used in the database from the given food parameter
-  foodNutrients = {}
-  # Search the database for the food
-  FOR EACH ROW IN DATABASE
-    IF food == ROW['food_name']
-      foodNutrients['food_name'] = ROW['food_name']
-      foodNutrients['calories'] = ROW['calories']
-      foodNutrients['fat'] = ROW['fat']
-      ... # Continue for all nutrient types in the database
+def checkFilters(database, filters, nutrient):\
+  DATABASE = database # Set the database to the passed through database
+  FOR EACH FILTER in filters
+    IF FILTER IS LOW
+      DATABASE = CALL filterLow(database, FILTER, nutrient)
+    ELSE IF FILTER IS MID
+      DATABASE = CALL filterMid(database, FILTER, nutrient)
+    ELSE IF FILTER IS HIGH
+      DATABASE = CALL filterHigh(database, FILTER, nutrient)
     ENDIF
   ENDFOR
-  RETURN foodNutrients
+  RETURN DATABASE
 
 ```
 
-##### 3.2.3.4 displayNutrients()
+##### 3.2.3.4 filterLow()
+
+<r> NEW FUNCTION </r>
 
 ```python
-def displayNutrients(food):
-  # Create a pie chart
-  CREATE pie_chart for food
-  # Create a bar graph
-  CREATE bar_graph for food
-
-  DRAW pie_chart TO bottom_left
-  DRAW bar_graph TO top_left
-  RETURN
-  
-```
-
-##### 3.2.3.5 displayFood()
-
-```python
-def displayFood(food):
-  CREATE NEW window
-
-  # Display each of the nutrients in a simple table
-  TABLE table
-  HEADER = ['Nutrient', 'Value']
-  FOR EACH nutrient IN food
-    ROW = [nutrient, food[nutrient]]
-    table ADD ROW
+def filterLow(database, nutrient):
+  FILTERED_DATABASE = [] # Empty list to return
+  MAX_VALUE = MAX(database[nutrient]) # Get the maximum value of the nutrient
+  FOR EACH ROW IN DATABASE
+    IF ROW[nutrient] < (MAX_VALUE / 3) # If the nutrient is less than 33% of the maximum value
+      FILTERED_DATABASE.append(ROW) # Add the row to the filtered database
+    ENDIF
   ENDFOR
-
-  DRAW table TO window
-
-  RETURN
+  RETURN FILTERED_DATABASE
   
 ```
 
-##### 3.2.3.6 addComparison()
+##### 3.2.3.5 filterMid()
+
+<r> NEW FUNCTION </r>
+
+```python
+def filterMid(database, nutrient):
+  FILTERED_DATABASE = [] # Empty list to return
+  MAX_VALUE = MAX(database[nutrient]) # Get the maximum value of the nutrient
+  FOR EACH ROW IN DATABASE
+    IF ROW[nutrient] < (MAX_VALUE / 6) AND ROW[nutrient] > (MAX_VALUE / 3) # If the nutrient is between 33% and 66% of the maximum value
+      FILTERED_DATABASE.append(ROW) # Add the row to the filtered database
+    ENDIF
+  ENDFOR
+  RETURN FILTERED_DATABASE
+
+  
+```
+
+##### 3.2.3.6 filterHigh()
+
+<r> NEW FUNCTION </r>
+
+```python
+def filterHigh(database, nutrient):
+  FILTERED_DATABASE = [] # Empty list to return
+  MAX_VALUE = MAX(database[nutrient]) # Get the maximum value of the nutrient
+  FOR EACH ROW IN DATABASE
+    IF ROW[nutrient] > (MAX_VALUE / 6) # If the nutrient is greater than 66% of the maximum value
+      FILTERED_DATABASE.append(ROW) # Add the row to the filtered database
+    ENDIF
+  ENDFOR
+  RETURN FILTERED_DATABASE
+  
+```
+
+##### 3.2.3.7 addComparison()
+
+<r> UPDATE to both add and remove a food item from the comparison list </r>
 
 ```python
 comparisonList = [] # List of foods to compare
 
 def addComparison(food):
-  foodObject = CALL retrieveNutrients(food)
-  comparisonList.append(foodObject)
+  IF food IN comparisonList
+    comparisonList.remove(food)
+  ELSE
+    comparisonList.append(food)
+  ENDIF
   RETURN
   
 ```
 
-##### 3.2.3.7 removeComparison()
+##### 3.2.3.8 displayResults()
+
+<r> NEW FUNCTION </r>
 
 ```python
-comparisonList = [] # List of foods to compare
-
-def removeComparison(food):
-  FOR EACH foodObject IN comparisonList
-    IF foodObject == food
-      comparisonList.remove(foodObject)
-    ENDIF
-  ENDFOR
-  RETURN
-  
-```
-
-##### 3.2.3.8 displayComparison()
-
-```python
-comparisonList = [] # List of foods to compare
-
-def displayComparison():
+def displayResults(filteredData):
   CREATE NEW window
 
-  # Create a comparison table
-  TABLE comparisonTable
-  HEADER = ['Nutrient', 'Food 1', 'Food 2']
-  # Assume all foods have the same nutrients, go through each nutrient
-  FOR EACH nutrient IN comparisonList[0]
-    ROW = [nutrient] # Add the nutrient name to the row (FIRST COLUMN)
-    FOR EACH foodObject IN comparisonList
-      ROW.append(foodObject[nutrient]) # Add the nutrient value to the row (SECOND COLUMN, THIRD COLUMN)
-    ENDFOR
-    comparisonTable ADD ROW # Add the row to the table
+  # Create a table
+  TABLE resultsTable
+  HEADER = ['Food', 'Calories', 'Fat', 'Carbs', 'Protein']
+  FOR EACH foodObject IN filteredData
+    ROW = [foodObject['name'], foodObject['calories'], foodObject['fat'], foodObject['carbs'], foodObject['protein']]
+    resultsTable ADD ROW
   ENDFOR
 
-  DRAW comparisonTable TO window # Draw the table to the window
+  DRAW resultsTable TO window # Draw the table to the window
   RETURN
-  
 ```
 
-##### 3.2.3.9 clearComparison()
+##### 3.2.3.9 reset()
+
+<r>NEW FUNCTION</r>
 
 ```python
-comparisonList = [] # List of foods to compare
 
-def clearComparison():
-  FOR EACH foodObject IN comparisonList
-    comparisonList.remove(foodObject)
-  ENDFOR
+def reset():
+  comparisonList = [] # Reset the comparison list
+  searchFilters = {} # Reset the search filters
+  searchNutrient = "" # Reset the search nutrient
+  searchName = "" # Reset the search name
   RETURN
 ```
 
@@ -415,7 +432,53 @@ def displayError(message):
   # Simple pop-up error message
   DISPLAY message AS popup
   RETURN
-  
+```
+
+##### 3.2.3.11 updateFood()
+
+<r>NEW FUNCTION</r>
+
+```python
+def updateFood(food, comparisonList, UI):
+  # Create a new window
+  CREATE NEW window
+
+  IF UI.selected = single
+    # Create a pie chart
+    CHART pieChart
+    DATA = food
+    DRAW pieChart TO window # Draw the pie chart to the window
+
+    # Create a bar chart
+    CHART barChart
+    DATA = food
+    DRAW barChart TO window # Draw the bar chart to the window
+
+    # Display the food data
+    TABLE foodTable
+    INSERT food.data INTO foodTable
+    DRAW foodTable TO window # Draw the table to the window
+  ELSE
+    # Create a comparison table
+    TABLE foodA, foodB
+    INSERT comparisonList[0].data INTO foodA
+    INSERT comparisonList[1].data INTO foodB
+    DRAW comparisonTable TO window # Draw the table to the window
+
+    # Create a comparison bar chart
+    CHART comparisonChartA, comparisonChartB
+    comparisonChartA.DATA = comparisonList[0]
+    comparisonChartB.DATA = comparisonList[1]
+    DRAW comparisonChartA, comparisonChartB TO window # Draw the bar chart to the window
+
+    # Create a comparison pie chart
+    CHART comparisonPieA, comparisonPieB
+    comparisonPieA.DATA = comparisonList[0]
+    comparisonPieB.DATA = comparisonList[1]
+    DRAW comparisonPieA, comparisonPieB TO window # Draw the pie chart to the window
+
+  ENDIF
+  RETURN
 ```
 
 ## 4. User Interface Design
