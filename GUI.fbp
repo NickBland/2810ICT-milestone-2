@@ -664,11 +664,11 @@
                           <property name="wrap">-1</property>
                         </object>
                       </object>
-                      <object class="sizeritem" expanded="false">
+                      <object class="sizeritem" expanded="true">
                         <property name="border">5</property>
                         <property name="flag">wxALIGN_TOP|wxALL|wxSHAPED|wxALIGN_CENTER_HORIZONTAL</property>
                         <property name="proportion">0</property>
-                        <object class="wxBoxSizer" expanded="false">
+                        <object class="wxBoxSizer" expanded="true">
                           <property name="minimum_size"></property>
                           <property name="name">search_filter_range_box</property>
                           <property name="orient">wxHORIZONTAL</property>
@@ -1055,11 +1055,11 @@
                           <property name="wrap">-1</property>
                         </object>
                       </object>
-                      <object class="sizeritem" expanded="false">
+                      <object class="sizeritem" expanded="true">
                         <property name="border">5</property>
                         <property name="flag">wxALIGN_CENTER_HORIZONTAL|wxALL</property>
                         <property name="proportion">0</property>
-                        <object class="wxBoxSizer" expanded="false">
+                        <object class="wxBoxSizer" expanded="true">
                           <property name="minimum_size"></property>
                           <property name="name">nutrition_level_filter_panel</property>
                           <property name="orient">wxVERTICAL</property>
@@ -2094,11 +2094,11 @@
                           </object>
                         </object>
                       </object>
-                      <object class="sizeritem" expanded="false">
+                      <object class="sizeritem" expanded="true">
                         <property name="border">5</property>
                         <property name="flag">wxEXPAND</property>
                         <property name="proportion">1</property>
-                        <object class="wxBoxSizer" expanded="false">
+                        <object class="wxBoxSizer" expanded="true">
                           <property name="minimum_size"></property>
                           <property name="name">bSizer11</property>
                           <property name="orient">wxHORIZONTAL</property>
@@ -2750,11 +2750,11 @@
                 </object>
               </object>
             </object>
-            <object class="notebookpage" expanded="false">
+            <object class="notebookpage" expanded="true">
               <property name="bitmap"></property>
               <property name="label">Comparison</property>
               <property name="select">0</property>
-              <object class="wxPanel" expanded="false">
+              <object class="wxPanel" expanded="true">
                 <property name="BottomDockable">1</property>
                 <property name="LeftDockable">1</property>
                 <property name="RightDockable">1</property>
