@@ -97,6 +97,32 @@ def searchDatabase(filters: dict, database: pd.DataFrame):
 
     return filtered_db
 
+def addToComparison(selected_food: pd.DataFrame = pd.DataFrame, comparison_list: list = []):
+    """
+    Add the currently selected food item to the comparison list
+    """
+    if selected_food is None or selected_food.empty:
+        return
+
+    # Extract the relevant value from the DataFrame
+    selected_food_value = selected_food.iloc[0]["food"]
+
+
+    print(type(selected_food))
+    print(selected_food)
+    print(type(comparison_list))
+    print(comparison_list)
+    # Add or remove the food item from the comparison list
+    if selected_food_value in comparison_list:
+        comparison_list.remove(selected_food_value)
+        # # Update the label
+        # self.search_compare_button.SetLabel("Add to Comparison")
+    else:
+        comparison_list.append(selected_food_value)
+        # # Update the label
+        # self.search_compare_button.SetLabel("Remove from Comparison")
+    
+    return comparison_list
 
 # Check which filter we are using
 def checkFilters(database: pd.DataFrame, filters: int, nutrient: str):
