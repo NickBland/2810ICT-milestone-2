@@ -62,17 +62,18 @@ def test_initDatabase_with_valid_csv(setup_files):
 ```
 - **2) Invalid Input and Expected Output**
 
-| **Invalid Input**             | **Expected Output** |
-|-------------------------------|---------------------|
-| `divide(10, 0)`               | `Handle Exception`  |
-| `add more cases in necessary` | `...`               |
+| **Invalid Input**              | **Expected Output** |
+|--------------------------------|---------------------|
+| `filePath = "test_invalid.csv` | `Returns None and raises `ValueError("File path is not a CSV file")``  |
 
 - **2) Code for the Test Function**
 ```python
-def test_divide_invalid():
-    with pytest.raises(ValueError) as exc_info:
-        divide(10, 0)
-    assert exc_info.type is ValueError
+def test_initDatabase_with_invalid_file_path(setup_files):
+    _, _, invalid_file_path = setup_files
+    result, error = initDatabase(invalid_file_path)
+    assert result is None
+    assert isinstance(error, ValueError)
+    assert str(error) == "File path is not a CSV file"
 ```
 ### Test Case 2:
 - **Test Function/Module**
