@@ -38,7 +38,7 @@ those functions, for example:
 
 ## 2. **Test Case Details**
 
-### Test Case 1:
+### Test Case 1: testing valid CSV
 - **Test Function/Module**
   - `test_initDatabase_with_valid_csv()`
 - **Tested Function/Module**
@@ -75,41 +75,44 @@ def test_initDatabase_with_invalid_file_path(setup_files):
     assert isinstance(error, ValueError)
     assert str(error) == "File path is not a CSV file"
 ```
-### Test Case 2:
+### Test Case 2: Testing Empty CSV 
 - **Test Function/Module**
-  - `test_divide_valid()`
-  - `test_divide_invalid()`
+  - `test_initDatabase_with_empty_csv()`
 - **Tested Function/Module**
-  - `divide(a, b)`
+  - `initDatabase(filePath)`
+  
 - **Description**
-  - A brief description of the tested function's usage, including its purpose, input, and output.
+  - This function tests the `initDatabase` function to ensure that it handles an empty CSV file correctly by returning an error.
 - **1) Valid Input and Expected Output**  
 
-| **Valid Input**               | **Expected Output** |
-|-------------------------------|---------------------|
-| `divide(10, 2)`               | `5`                 |
-| `divide(10, -2)`              | `-5`                |
-| `add more cases in necessary` | `...`               |
+| **Invalid Input**              | **Expected Output** |
+|--------------------------------|---------------------|
+| `filePath = "test_invalid.csv` | `Returns None and raises `ValueError("File path is not a CSV file")``  |
 
 - **1) Code for the Test Function**
 ```python
-def test_divide_valid():
-    assert divide(10, 2) == 5
-    assert divide(10, -2) == -5
+def test_initDatabase_with_empty_csv(setup_files):
+    _, empty_csv_path, _ = setup_files
+    result, error = initDatabase(empty_csv_path)
+    assert result is None
+    assert isinstance(error, ValueError)
+    assert str(error) == "File is empty"
 ```
 - **2) Invalid Input and Expected Output**
 
 | **Invalid Input**             | **Expected Output** |
 |-------------------------------|---------------------|
-| `divide(10, 0)`               | `Handle Exception`  |
-| `add more cases in necessary` | `...`               |
+| `filePath = "test_empty.csv"` | `Returns None and raises `ValueError("File is empty")``|
+
 
 - **2) Code for the Test Function**
 ```python
-def test_divide_invalid():
-    with pytest.raises(ValueError) as exc_info:
-        divide(10, 0)
-    assert exc_info.type is ValueError
+def test_initDatabase_with_empty_csv(setup_files):
+    _, empty_csv_path, _ = setup_files
+    result, error = initDatabase(empty_csv_path)
+    assert result is None
+    assert isinstance(error, ValueError)
+    assert str(error) == "File is empty"
 ```
 
 ### Test Case 3:
