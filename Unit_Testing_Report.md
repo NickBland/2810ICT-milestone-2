@@ -40,19 +40,17 @@ those functions, for example:
 
 ### Test Case 1:
 - **Test Function/Module**
-  - `test_divide_valid()`
-  - `test_divide_invalid()`
+  - `test_initDatabase_with_valid_csv()`
 - **Tested Function/Module**
-  - `divide(a, b)`
+  - `initDatabase(filePath)`
 - **Description**
-  - A brief description of the tested function's usage, including its purpose, input, and output.
-- **1) Valid Input and Expected Output**  
+  - This function loads a CSV file into the database. The purpose of the test is to check whether the database is correctly loaded when given a valid CSV file.
+- **1) Valid Input and Expected Output** 
 
-| **Valid Input**               | **Expected Output** |
-|-------------------------------|---------------------|
-| `divide(10, 2)`               | `5`                 |
-| `divide(10, -2)`              | `-5`                |
-| `add more cases in necessary` | `...`               |
+| **Valid Input**               | **Expected Output**               |
+|-------------------------------|-----------------------------------|
+| `filePath = "test_valid.csv`  | `returns Database without errors` |
+
 
 - **1) Code for the Test Function**
 ```python
