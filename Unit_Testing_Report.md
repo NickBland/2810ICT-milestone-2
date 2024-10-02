@@ -1,23 +1,38 @@
 # Unit Testing Report
 
 Please provide your GitHub repository link.
-### GitHub Repository URL: https://github.com/XXXX/XXXXX.git
+### GitHub Repository URL: https://github.com/NickBland/2810ICT-milestone-2.git
 
 ---
 
 The testing report should focus solely on <span style="color:red"> testing all the self-defined functions related to 
-the five required features.</span> There is no need to test the GUI components. Therefore, it is essential to decouple your code and separate the logic from the GUI-related code.
+the five required features.</span> There is no need to test the GUI components. 
+Therefore, it is essential to decouple your code and separate the logic from the GUI-related code.
 
 
 ## 1. **Test Summary**
 list all tested functions related to the five required features and the corresponding test functions designed to test 
 those functions, for example:
 
-| **Tested Functions** | **Test Functions**                               |
-|----------------------|--------------------------------------------------|
-| `add(x1,x2)`         | `test_add_valid()` <br> `test_add_invalid`       |
-| `divide(x1,x2)`      | `test_divide_valid()` <br> `test_divide_invalid` |
-| `...`                | `...`                                            |
+## 1. **Test Summary**
+
+| **Tested Functions**           | **Test Functions**                               |
+|-------------------------------|--------------------------------------------------|
+| `initDatabase(filePath)`       | `test_initDatabase_with_valid_csv()`             |
+|                               | `test_initDatabase_with_empty_csv()`             |
+|                               | `test_initDatabase_with_invalid_file_path()`     |
+|                               | `test_initDatabase_with_empty_file_path()`       |
+|                               | `test_initDatabase_with_nonexistent_file()`      |
+| `searchDatabase(filters, db)`  | `test_searchDatabase_with_keyword()`             |
+|                               | `test_searchDatabase_with_nutrient_range()`      |
+|                               | `test_searchDatabase_with_nutrient_level()`      |
+|                               | `test_searchDatabase_with_invalid_minmax()`      |
+|                               | `test_searchDatabase_with_all_filters()`         |
+|                               | `test_searchDatabase_with_low_protein()`         |
+|                               | `test_searchDatabase_with_mid_protein()`         |
+|                               | `test_searchDatabase_with_high_protein()`        |
+|                               | `test_searchDatabase_with_no_filters()`          |
+| `displayResults(results, grid)`| `test_displayResults()`                          |
 
 ---
 
