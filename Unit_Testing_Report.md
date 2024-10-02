@@ -49,14 +49,16 @@ those functions, for example:
 
 | **Valid Input**               | **Expected Output**               |
 |-------------------------------|-----------------------------------|
-| `filePath = "test_valid.csv`  | `returns Database without errors` |
+| `filePath = "test_valid.csv`  | `returns result as Database, error as None` |
 
 
 - **1) Code for the Test Function**
 ```python
-def test_divide_valid():
-    assert divide(10, 2) == 5
-    assert divide(10, -2) == -5
+def test_initDatabase_with_valid_csv(setup_files):
+    valid_csv_path, _, _ = setup_files
+    result, error = initDatabase(valid_csv_path)
+    assert result is not None
+    assert error is None
 ```
 - **2) Invalid Input and Expected Output**
 
