@@ -251,6 +251,271 @@ def test_searchDatabase_with_nutrient_range(fetch_real_data):
     assert result.iloc[0]["food"] == "cream cheese"
 ```
 
+### Test Case 7: testing searchDatabase with all filters applied
+- **Test Function/Module**
+  - `test_searchDatabase_with_all_filters()`
+- **Tested Function/Module**
+  - `searchDatabase(filters, db)`
+- **Description**
+  - This function applies multiple filters (keyword, nutrient ranges, nutrient levels) to search food items from the database. The purpose of the test is to check if the function handles valid and invalid input combinations for multiple filters correctly.
+
+- **1) Valid Input and Expected Output**  
+
+| **Valid Input**                                  | **Expected Output**                                   |
+|--------------------------------------------------|------------------------------------------------------|
+| `filters = { "keyword": "", "nutrient": "", "min": "", "max": "", "level-protein": 1, "level-sugar": 1, "level-carb": 2, "level-fat": 1, "level-nutri": 1}` | Returns a DataFrame filtered by all these filters      |
+
+- **1) Code for the Test Function**
+```python
+def test_searchDatabase_with_all_filters(fetch_real_data):
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+    filters = {
+        "keyword": "",
+        "nutrient": "",
+        "min": "",
+        "max": "",
+        "level-protein": 1,
+        "level-sugar": 1,
+        "level-carb": 2,
+        "level-fat": 1,
+        "level-nutri": 1
+    }
+    result = searchDatabase(filters, df)
+    assert len(result) == 3
+    assert result.iloc[0]["food"] == "tapioca pearls"
+
+```
+- **2) Invalid Input and Expected Output**
+
+| **Invalid Input**                                          | **Expected Output**                               |
+|------------------------------------------------------------|---------------------------------------------------|
+| `filters = {"keyword": "invalid", "level-protein": 0}`      | Returns an empty DataFrame (invalid keyword and level)  |
+| `filters = {"nutrient": "Nonexistent", "level-protein": 4}` | Returns an empty DataFrame (invalid nutrient and level) |
+| `filters = {"keyword": 123, "nutrient": "Protein", "min": "abc", "max": 1.0}` | Returns full DataFrame (invalid min value)        |
+
+- **2) Code for the Test Function**
+```python
+def test_searchDatabase_with_invalid_all_filters(fetch_real_data):
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+```
+
+### Test Case 8: testing searchDatabase with low protein level
+- **Test Function/Module**
+  - `test_searchDatabase_with_low_protein()`
+- **Tested Function/Module**
+  - `searchDatabase(filters, db)`
+- **Description**
+  - This function filters food items with low protein levels. The purpose of the test is to ensure the function correctly identifies and returns food items with low protein when `level-protein` is set to 1.
+
+- **1) Valid Input and Expected Output**  
+
+| **Valid Input**                              | **Expected Output**                                     |
+|----------------------------------------------|--------------------------------------------------------|
+| `filters = {"level-protein": 1}`             | Returns DataFrame filtered by low-protein items         |
+
+- **1) Code for the Test Function**
+```python
+def test_searchDatabase_with_low_protein(fetch_real_data):
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+    filters = {"level-protein": 1}
+    result = searchDatabase(filters, df)
+    assert len(result) == 2383
+    assert result.iloc[0]["food"] == "cream cheese"
+```
+- **2) Invalid Input and Expected Output**
+
+| **Invalid Input**                                      | **Expected Output**                                  |
+|--------------------------------------------------------|------------------------------------------------------|
+| `filters = {"level-protein": 0}`                       | Returns an empty DataFrame (invalid protein level)    |
+| `filters = {"level-protein": -1}`                      | Returns an empty DataFrame (invalid protein level)    |
+| `filters = {"level-protein": 4}`                       | Returns an empty DataFrame (invalid protein level)    |
+| `filters = {"level-protein": "abc"}`                   | Returns an empty DataFrame (non-numeric protein level) |
+
+```python
+def test_searchDatabase_with_invalid_low_protein(fetch_real_data):
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+```
+
+
+### Test Case 9: testing `searchDatabase` with mid protein level
+- **Test Function/Module**
+  - `test_searchDatabase_with_mid_protein()`
+- **Tested Function/Module**
+  - `searchDatabase(filters, db)`
+- **Description**
+  - This function filters food items with mid protein levels. The purpose of the test is to ensure the function correctly identifies and returns food items with mid protein when `level-protein` is set to 2.
+
+- **1) Valid Input and Expected Output**  
+
+| **Valid Input**                              | **Expected Output**                                     |
+|----------------------------------------------|--------------------------------------------------------|
+| `filters = {"level-protein": 2}`             | Returns DataFrame filtered by mid-protein items         |
+
+- **1) Code for the Test Function**
+```python
+def test_searchDatabase_with_mid_protein(fetch_real_data):
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+    filters = {"level-protein": 2}
+    result = searchDatabase(filters, df)
+    assert len(result) == 7
+    assert result.iloc[0]["food"] == "pork backribs raw"
+```
+- **2) Invalid Input and Expected Output**
+
+| **Invalid Input**                                      | **Expected Output**                                  |
+|--------------------------------------------------------|------------------------------------------------------|
+| `filters = {"level-protein": 0}`                       | Returns an empty DataFrame (invalid protein level)    |
+| `filters = {"level-protein": -1}`                      | Returns an empty DataFrame (invalid protein level)    |
+| `filters = {"level-protein": 4}`                       | Returns an empty DataFrame (invalid protein level)    |
+| `filters = {"level-protein": "xyz"}`                   | Returns an empty DataFrame (non-numeric protein level) |
+
+```python
+def test_searchDatabase_with_invalid_mid_protein(fetch_real_data):
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+```
+
+
+### Test Case 10: testing searchDatabase with high protein level
+- **Test Function/Module**
+  - `test_searchDatabase_with_high_protein()`
+- **Tested Function/Module**
+  - `searchDatabase(filters, db)`
+- **Description**
+  - This function filters food items with high protein levels. The purpose of the test is to ensure the function correctly identifies and returns food items with high protein when `level-protein` is set to 3.
+
+- **1) Valid Input and Expected Output**  
+
+| **Valid Input**                              | **Expected Output**                                     |
+|----------------------------------------------|--------------------------------------------------------|
+| `filters = {"level-protein": 3}`             | Returns DataFrame filtered by high-protein items        |
+
+- **1) Code for the Test Function**
+```python
+def test_searchDatabase_with_high_protein(fetch_real_data):
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+    filters = {"level-protein": 3}
+    result = searchDatabase(filters, df)
+    assert len(result) == 5
+    assert result.iloc[0]["food"] == "pork top loin roasts raw"
+```
+- **2) Invalid Input and Expected Output**
+
+| **Invalid Input**                                      | **Expected Output**                                  |
+|--------------------------------------------------------|------------------------------------------------------|
+| `filters = {"level-protein": 0}`                       | Returns an empty DataFrame (invalid protein level)    |
+| `filters = {"level-protein": -1}`                      | Returns an empty DataFrame (invalid protein level)    |
+| `filters = {"level-protein": 4}`                       | Returns an empty DataFrame (invalid protein level)    |
+| `filters = {"level-protein": "abc"}`                   | Returns an empty DataFrame (non-numeric protein level) |
+
+```python
+def test_searchDatabase_with_invalid_high_protein(fetch_real_data):
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+```
+## 2. **Test Case Details**
+
+### Test Case 11: testing searchDatabase with no filters applied
+- **Test Function/Module**
+  - `test_searchDatabase_with_no_filters()`
+- **Tested Function/Module**
+  - `searchDatabase(filters, db)`
+- **Description**
+  - This function searches the database with no filters applied. The purpose of the test is to ensure that when no filters are provided, the function returns the entire dataset.
+
+- **1) Valid Input and Expected Output**  
+
+| **Valid Input**                              | **Expected Output**                                      |
+|----------------------------------------------|---------------------------------------------------------|
+| `filters = {}`                               | Returns the entire DataFrame with all food items         |
+
+- **1) Code for the Test Function**
+```python
+def test_searchDatabase_with_no_filters(fetch_real_data):
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+    filters = {}
+    result = searchDatabase(filters, df)
+    assert len(result) == 2396
+    assert result.iloc[0]["food"] == "cream cheese"
+```
+- **2) Invalid Input and Expected Output**
+
+| **Invalid Input**                                      | **Expected Output**                                    |
+|--------------------------------------------------------|--------------------------------------------------------|
+| `filters = {"keyword": None}`                          | Returns the entire DataFrame (no filters applied)       |
+| `filters = {"nutrient": None, "level-protein": None}`  | Returns the entire DataFrame (no filters applied)       |
+
+```python
+def test_searchDatabase_with_no_filters_invalid(fetch_real_data):
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+```
+
+### Test Case 12: testing `displayResults(results, grid)`
+- **Test Function/Module**
+  - `test_displayResults()`
+- **Tested Function/Module**
+  - `displayResults(results, grid)`
+- **Description**
+  - This function displays the results in a grid. The purpose of the test is to verify that the function properly updates the grid with the provided data.
+
+- **1) Valid Input and Expected Output**  
+
+| **Valid Input**                              | **Expected Output**                                                                 |
+|----------------------------------------------|------------------------------------------------------------------------------------|
+| `results = DataFrame with food items`, `grid = Mock grid object` | The grid is updated with the contents of the results DataFrame |
+
+- **1) Code for the Test Function**
+```python
+def test_displayResults(fetch_real_data, mocker):
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+
+    # Create a mock grid
+    # grid = SimpleMock()
+    grid = mocker.MagicMock()
+
+    # Call the displayResults function
+    displayResults(df, grid)
+
+    # Assertions to check if the grid methods were called correctly
+    grid.ClearGrid.assert_called_once()
+    grid.SetTable.assert_called_once()
+    grid.AutoSizeColumns.assert_called_once()
+    grid.HideRowLabels.assert_called_once()
+```
+- **2) Invalid Input and Expected Output**
+
+| **Invalid Input**                                      | **Expected Output**                                    |
+|--------------------------------------------------------|--------------------------------------------------------|
+| `results = None`, `grid = Mock grid object`            | Grid remains unchanged; no exceptions raised           |
+| `results = Empty DataFrame`, `grid = Mock grid object` | Grid is cleared but no rows are populated              |
+
+```python
+def test_displayResults(fetch_real_data, mocker):
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+
+    # Create a mock grid
+    # grid = SimpleMock()
+    grid = mocker.MagicMock()
+
+    # Call the displayResults function
+    displayResults(df, grid)
+
+    # Assertions to check if the grid methods were called correctly
+    grid.ClearGrid.assert_called_once()
+    grid.SetTable.assert_called_once()
+    grid.AutoSizeColumns.assert_called_once()
+    grid.HideRowLabels.assert_called_once()
+```
 ## 3. **Testing Report Summary**
 Include a screenshot of unit_test.html showing the results of all the above tests. 
 
