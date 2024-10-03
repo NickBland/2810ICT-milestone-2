@@ -115,121 +115,141 @@ def test_initDatabase_with_empty_csv(setup_files):
     assert str(error) == "File is empty"
 ```
 
-### Test Case 3:
+### Test Case 3: Test Case for Search Function with Keyword
 - **Test Function/Module**
-  - `test_divide_valid()`
-  - `test_divide_invalid()`
+  - `test_searchDatabase_with_keyword()`
 - **Tested Function/Module**
-  - `divide(a, b)`
+  - `searchDatabase(filters, db)`
 - **Description**
-  - A brief description of the tested function's usage, including its purpose, input, and output.
+  - This function searches the database for items based on the keyword filter. This test verifies that the correct entries are returned when filtering by a keyword.
+- **1) Valid Input and Expected Output**  
+
+| **Valid Input**                  | **Expected Output**                            |
+|----------------------------------|------------------------------------------------|
+| `filters = {"keyword": "banana"}` | `Returns DataFrame containing "banana" entries` |
+
+- **1) Code for the Test Function**
+```python
+def test_searchDatabase_with_keyword(fetch_real_data):
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+    filters = {"keyword": "banana"}
+    result = searchDatabase(filters, df)
+    assert len(result) == 6
+    assert result.iloc[0]["food"] == "banana cream pie"
+```
+- **2) Invalid Input and Expected Output**
+
+| **Invalid Input**                                   | **Expected Output**                               |
+|-----------------------------------------------------|---------------------------------------------------|
+| `filters = {"keyword": ""}`                         | Returns an empty DataFrame (no search results)    |
+| `filters = {"keyword": None}`                       | Returns an empty DataFrame (no search results)    |
+| `filters = {"keyword": 123}`                        | Returns an empty DataFrame (invalid search term)  |
+| `filters = {"keyword": "nonexistentfooditem"}`      | Returns an empty DataFrame (no matches found)     |
+
+
+- **2) Code for the Test Function**
+```python
+def test_searchDatabase_with_invalid_keyword(fetch_real_data):
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+
+```
+
+### Test Case 4: Test case for search with Nutrient Range
+- **Test Function/Module**
+  - `test_searchDatabase_with_nutrient_range()`
+- **Tested Function/Module**
+  - `searchDatabase(filters, db)`
+- **Description**
+  - This function filters food items based on a specified nutrient range (e.g., protein). The test ensures that the function handles invalid range inputs, such as non-numeric values or nonsensical ranges, correctly.
 - **1) Valid Input and Expected Output**  
 
 | **Valid Input**               | **Expected Output** |
 |-------------------------------|---------------------|
-| `divide(10, 2)`               | `5`                 |
-| `divide(10, -2)`              | `-5`                |
-| `add more cases in necessary` | `...`               |
+| `filters = {"nutrient": "Protein", "min": 0.5, "max": 1.0}`| `Returns DataFrame containing foods within the protein range 0.5 to 1.0`                 |
+
 
 - **1) Code for the Test Function**
 ```python
-def test_divide_valid():
-    assert divide(10, 2) == 5
-    assert divide(10, -2) == -5
+def test_searchDatabase_with_nutrient_range(fetch_real_data):
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+    filters = {"nutrient": "Protein", "min": "0.5", "max": "1.0"}
+    result = searchDatabase(filters, df)
+    assert len(result) == 206
+    assert result.iloc[0]["food"] == "cream cheese"
+
 ```
 - **2) Invalid Input and Expected Output**
 
-| **Invalid Input**             | **Expected Output** |
-|-------------------------------|---------------------|
-| `divide(10, 0)`               | `Handle Exception`  |
-| `add more cases in necessary` | `...`               |
+| **Invalid Input**                                         | **Expected Output**                             |
+|-----------------------------------------------------------|-------------------------------------------------|
+| `filters = {"nutrient": "Protein", "min": "abc", "max": 1.0}` | Returns an empty DataFrame (invalid min value)   |
+| `filters = {"nutrient": "Protein", "min": 0.5, "max": "xyz"}` | Returns an empty DataFrame (invalid max value)   |
+| `filters = {"nutrient": "Protein", "min": 2.0, "max": 1.0}`   | Returns an empty DataFrame (`min` > `max`)       |
+| `filters = {"nutrient": "NonexistentNutrient", "min": 0, "max": 10}` | Returns an empty DataFrame (invalid nutrient)    |
 
 - **2) Code for the Test Function**
 ```python
-def test_divide_invalid():
-    with pytest.raises(ValueError) as exc_info:
-        divide(10, 0)
-    assert exc_info.type is ValueError
+def test_searchDatabase_with_invalid_nutrient_range(fetch_real_data):
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+
 ```
 
-### Test Case 4:
+
+
+### Test Case 5: testing searchDatabase with nutrient level
 - **Test Function/Module**
-  - `test_divide_valid()`
-  - `test_divide_invalid()`
+  - `test_searchDatabase_with_nutrient_level()`
 - **Tested Function/Module**
-  - `divide(a, b)`
+  - `searchDatabase(filters, db)`
 - **Description**
-  - A brief description of the tested function's usage, including its purpose, input, and output.
+  - This function filters food items by a specific nutrient level (low, mid, high). The purpose of the test is to ensure the function correctly filters items based on valid nutrient levels and handles invalid levels appropriately.
+  
 - **1) Valid Input and Expected Output**  
 
-| **Valid Input**               | **Expected Output** |
-|-------------------------------|---------------------|
-| `divide(10, 2)`               | `5`                 |
-| `divide(10, -2)`              | `-5`                |
-| `add more cases in necessary` | `...`               |
+| **Valid Input**                            | **Expected Output**                                 |
+|--------------------------------------------|---------------------------------------------------|
+| `filters = {"level-protein": 3}`           | Returns DataFrame filtered by high-protein items   |
 
 - **1) Code for the Test Function**
 ```python
-def test_divide_valid():
-    assert divide(10, 2) == 5
-    assert divide(10, -2) == -5
-```
-- **2) Invalid Input and Expected Output**
+def test_searchDatabase_with_nutrient_level(fetch_real_data):
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+    filters = {"level-protein": 3}
+    result = searchDatabase(filters, df)
+    assert len(result) == 5
+    assert result.iloc[0]["food"] == "pork top loin roasts raw"
 
-| **Invalid Input**             | **Expected Output** |
-|-------------------------------|---------------------|
-| `divide(10, 0)`               | `Handle Exception`  |
-| `add more cases in necessary` | `...`               |
-
-- **2) Code for the Test Function**
-```python
-def test_divide_invalid():
-    with pytest.raises(ValueError) as exc_info:
-        divide(10, 0)
-    assert exc_info.type is ValueError
 ```
 
-
-### Test Case 5:
+### Test Case 6: testing searchDatabase with invalid `min` and `max` values
 - **Test Function/Module**
-  - `test_divide_valid()`
-  - `test_divide_invalid()`
+  - `test_searchDatabase_with_invalid_minmax()`
 - **Tested Function/Module**
-  - `divide(a, b)`
+  - `searchDatabase(filters, db)`
 - **Description**
-  - A brief description of the tested function's usage, including its purpose, input, and output.
+  - This function filters food items by a specified nutrient range using `min` and `max` values. The purpose of the test is to ensure the function handles invalid or non-numeric `min` and `max` values correctly.
+
 - **1) Valid Input and Expected Output**  
 
-| **Valid Input**               | **Expected Output** |
-|-------------------------------|---------------------|
-| `divide(10, 2)`               | `5`                 |
-| `divide(10, -2)`              | `-5`                |
-| `add more cases in necessary` | `...`               |
+| **Valid Input**                            | **Expected Output**                                     |
+|--------------------------------------------|--------------------------------------------------------|
+| `filters = {"nutrient": "Protein", "min": 0.5, "max": 1.0}` | Returns DataFrame with items that fall in this protein range |
 
 - **1) Code for the Test Function**
 ```python
-def test_divide_valid():
-    assert divide(10, 2) == 5
-    assert divide(10, -2) == -5
+def test_searchDatabase_with_nutrient_range(fetch_real_data):
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+    filters = {"nutrient": "Protein", "min": 0.5, "max": 1.0}
+    result = searchDatabase(filters, df)
+    assert len(result) == 206
+    assert result.iloc[0]["food"] == "cream cheese"
 ```
-- **2) Invalid Input and Expected Output**
-
-| **Invalid Input**             | **Expected Output** |
-|-------------------------------|---------------------|
-| `divide(10, 0)`               | `Handle Exception`  |
-| `add more cases in necessary` | `...`               |
-
-- **2) Code for the Test Function**
-```python
-def test_divide_invalid():
-    with pytest.raises(ValueError) as exc_info:
-        divide(10, 0)
-    assert exc_info.type is ValueError
-```
-
-### Test Case 6:
-
-add more test cases if necessary.
 
 ## 3. **Testing Report Summary**
 Include a screenshot of unit_test.html showing the results of all the above tests. 
