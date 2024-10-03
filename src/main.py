@@ -4,7 +4,7 @@ import pandas as pd
 
 from gui import MyFrame3 as MyFrame
 from error import ErrorDialog
-from database import initDatabase, searchDatabase, displayResults
+from database import initDatabase, searchDatabase, displayResults, addToComparison
 from food import updateFood
 
 # Global variables
@@ -112,24 +112,7 @@ class MyFrame(MyFrame):
         displayResults(DATABASE, self.search_results_grid)
 
     def addComparison(self, event):
-        """
-        Add the currently selected food item to the comparison list
-        """
-        if self.currently_selected_food is None or self.currently_selected_food.empty:
-            return
-
-        # Extract the relevant value from the DataFrame
-        selected_food_value = self.currently_selected_food.iloc[0]["food"]
-
-        # Add or remove the food item from the comparison list
-        if selected_food_value in self.comparison_list:
-            self.comparison_list.remove(selected_food_value)
-            # Update the label
-            self.search_compare_button.SetLabel("Add to Comparison")
-        else:
-            self.comparison_list.append(selected_food_value)
-            # Update the label
-            self.search_compare_button.SetLabel("Remove from Comparison")
+        addToComparison(self.currently_selected_food, self.comparison_list)
 
     def updatePage(self, event):
         # Convert the comparison list to a DataFrame object
