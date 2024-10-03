@@ -517,14 +517,16 @@ def test_displayResults(fetch_real_data, mocker):
     grid.HideRowLabels.assert_called_once()
 ```
 ## 3. **Testing Report Summary**
-Include a screenshot of unit_test.html showing the results of all the above tests. 
+Here is a screenshot of unit_test.html showing the results of all the above tests. 
 
 You can use the following command to run the unit tests and generate the unit_test.html report.
 
 ```commandline
 pytest test_all_functions.py --html=unit_test.html --self-contained-html
 ```
+[Unit Test Report](file:///Users/cameroncassar/2810ICT-milestone-2/src/unit_test.html)
+
+
 Note: test_all_functions.py should contain all the test functions designed to test the self-defined functions related 
 to the five required features.
-
-![unit_test_summary](./Unit_test.png)
+![unit test summary]![Unit_test_report.png](Executive%20summary%20screenshots%2FUnit_test_report.png)

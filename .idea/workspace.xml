@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="45e859e7-b564-4b88-ac67-7a62a03fbe88" name="Changes" comment="adding images" />
+    <list default="true" id="45e859e7-b564-4b88-ac67-7a62a03fbe88" name="Changes" comment="Test Case 6 to 12" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,16 +27,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Executive-summary&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/cameroncassar/2810ICT-milestone-2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.main.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "Unit-testing-report",
+    "last_opened_file_path": "/Users/cameroncassar/2810ICT-milestone-2",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="2810ICT-milestone-2" />
@@ -182,7 +182,63 @@
       <option name="project" value="LOCAL" />
       <updated>1727680608393</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="test summary 1">
+      <option name="closed" value="true" />
+      <created>1727851732995</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1727851732995</updated>
+    </task>
+    <task id="LOCAL-00015" summary="test case 1">
+      <option name="closed" value="true" />
+      <created>1727852163930</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1727852163930</updated>
+    </task>
+    <task id="LOCAL-00016" summary="1 code for test function">
+      <option name="closed" value="true" />
+      <created>1727852842505</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1727852842505</updated>
+    </task>
+    <task id="LOCAL-00017" summary="test invalid file path">
+      <option name="closed" value="true" />
+      <created>1727853345609</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1727853345609</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Test Case 2: Testing Empty CSV">
+      <option name="closed" value="true" />
+      <created>1727854122132</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1727854122132</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Test Case 3 to 6">
+      <option name="closed" value="true" />
+      <created>1727921024797</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1727921024797</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Test Case 6 to 12">
+      <option name="closed" value="true" />
+      <created>1727923223287</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1727923223287</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -196,6 +252,13 @@
     <MESSAGE value="Nutrition Level text" />
     <MESSAGE value="Food comparison text" />
     <MESSAGE value="adding images" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding images" />
+    <MESSAGE value="test summary 1" />
+    <MESSAGE value="test case 1" />
+    <MESSAGE value="1 code for test function" />
+    <MESSAGE value="test invalid file path" />
+    <MESSAGE value="Test Case 2: Testing Empty CSV" />
+    <MESSAGE value="Test Case 3 to 6" />
+    <MESSAGE value="Test Case 6 to 12" />
+    <option name="LAST_COMMIT_MESSAGE" value="Test Case 6 to 12" />
   </component>
 </project>
