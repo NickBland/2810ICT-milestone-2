@@ -3,7 +3,7 @@ import pandas as pd
 import os
 
 # Import DB functions
-from database import initDatabase, searchDatabase, displayResults
+from database import initDatabase, searchDatabase, displayResults, addToComparison
 
 
 def pytest_html_report_title(report):
@@ -167,6 +167,55 @@ def test_searchDatabase_with_no_filters(fetch_real_data):
     result = searchDatabase(filters, df)
     assert len(result) == 2396
     assert result.iloc[0]["food"] == "cream cheese"
+
+def test_addComparisonNone(fetch_real_data):
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+    comparison_list = []
+
+    # Empty selected food
+    selected_food = None
+    currently_selected_food = selected_food
+    addToComparison(currently_selected_food, comparison_list)
+
+def test_addComparisonAddOne(fetch_real_data):
+
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+    comparison_list = []
+
+    # Select Food
+    selected_food = df[df["food"] == "cream Cheese"]
+    currently_selected_food = selected_food
+    addToComparison(currently_selected_food, comparison_list)
+
+def test_addComparisonAddTwo(fetch_real_data):
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+    comparison_list = []
+    
+    # add two different foods
+    selected_food = df[df["food"] == "cream cheese"]
+    currently_selected_food = selected_food
+    comparison_list = addToComparison(currently_selected_food, comparison_list)
+
+    selected_food = df[df["food"] == "gruyere cheese"]
+    currently_selected_food = selected_food
+    addToComparison(currently_selected_food, comparison_list)
+
+def test_addComparisonAddSame(fetch_real_data):
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+    comparison_list = []
+
+    # Add two of the same food
+    selected_food = df[df["food"] == "cream cheese"]
+    currently_selected_food = selected_food
+    comparison_list = addToComparison(currently_selected_food, comparison_list)
+
+    selected_food = df[df["food"] == "cream cheese"]
+    currently_selected_food = selected_food
+    addToComparison(currently_selected_food, comparison_list)
 
 
 def test_displayResults(fetch_real_data, mocker):
