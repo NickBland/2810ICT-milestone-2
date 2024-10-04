@@ -15,24 +15,28 @@ list all tested functions related to the five required features and the correspo
 those functions, for example:
 
 ## 1. **Test Summary**
+| **Tested Functions**             | **Test Functions**                                |
+|----------------------------------|---------------------------------------------------|
+| `initDatabase(filePath)`         | `test_initDatabase_with_valid_csv()`              |
+|                                  | `test_initDatabase_with_empty_csv()`              |
+|                                  | `test_initDatabase_with_invalid_file_path()`      |
+|                                  | `test_initDatabase_with_empty_file_path()`        |
+|                                  | `test_initDatabase_with_nonexistent_file()`       |
+| `searchDatabase(filters, db)`    | `test_searchDatabase_with_keyword()`              |
+|                                  | `test_searchDatabase_with_nutrient_range()`       |
+|                                  | `test_searchDatabase_with_nutrient_level()`       |
+|                                  | `test_searchDatabase_with_invalid_minmax()`       |
+|                                  | `test_searchDatabase_with_all_filters()`          |
+|                                  | `test_searchDatabase_with_low_protein()`          |
+|                                  | `test_searchDatabase_with_mid_protein()`          |
+|                                  | `test_searchDatabase_with_high_protein()`         |
+|                                  | `test_searchDatabase_with_no_filters()`           |
+| `addToComparison(selected_food, comparison_list)` | `test_addComparisonNone()`|
+|                                  | `test_addComparisonAddOne()`                      |
+|                                  | `test_addComparisonAddTwo()`                      |
+|                                  | `test_addComparisonAddSame()`                     |
+| `displayResults(results, grid)`  | `test_displayResults()`                           |
 
-| **Tested Functions**           | **Test Functions**                               |
-|-------------------------------|--------------------------------------------------|
-| `initDatabase(filePath)`       | `test_initDatabase_with_valid_csv()`             |
-|                               | `test_initDatabase_with_empty_csv()`             |
-|                               | `test_initDatabase_with_invalid_file_path()`     |
-|                               | `test_initDatabase_with_empty_file_path()`       |
-|                               | `test_initDatabase_with_nonexistent_file()`      |
-| `searchDatabase(filters, db)`  | `test_searchDatabase_with_keyword()`             |
-|                               | `test_searchDatabase_with_nutrient_range()`      |
-|                               | `test_searchDatabase_with_nutrient_level()`      |
-|                               | `test_searchDatabase_with_invalid_minmax()`      |
-|                               | `test_searchDatabase_with_all_filters()`         |
-|                               | `test_searchDatabase_with_low_protein()`         |
-|                               | `test_searchDatabase_with_mid_protein()`         |
-|                               | `test_searchDatabase_with_high_protein()`        |
-|                               | `test_searchDatabase_with_no_filters()`          |
-| `displayResults(results, grid)`| `test_displayResults()`                          |
 
 ---
 
@@ -114,8 +118,97 @@ def test_initDatabase_with_empty_csv(setup_files):
     assert isinstance(error, ValueError)
     assert str(error) == "File is empty"
 ```
+### Test Case 3: testing initDatabase with an invalid file path
+- **Test Function/Module**
+  - `test_initDatabase_with_invalid_file_path()`
+- **Tested Function/Module**
+  - `initDatabase(filePath)`
+- **Description**
+  - This function attempts to initialize the database from an invalid file path. The purpose of the test is to ensure that the function handles invalid file paths correctly by returning an error.
 
-### Test Case 3: Test Case for Search Function with Keyword
+- **1) Valid Input and Expected Output**  
+
+| **Valid Input**                                          | **Expected Output**                                         |
+|----------------------------------------------------------|-------------------------------------------------------------|
+| `filePath = "test_invalid.csvERROR"`                     | Returns `None` and raises `ValueError("File path is not a CSV file")` |
+
+- **1) Code for the Test Function**
+```python
+def test_initDatabase_with_invalid_file_path(setup_files):
+    _, _, invalid_file_path = setup_files
+    result, error = initDatabase(invalid_file_path)
+    assert result is None
+    assert isinstance(error, ValueError)
+    assert str(error) == "File path is not a CSV file"
+```
+### Test Case 4: testing `initDatabase` with an empty file path
+- **Test Function/Module**
+  - `test_initDatabase_with_empty_file_path()`
+- **Tested Function/Module**
+  - `initDatabase(filePath)`
+- **Description**
+  - This function attempts to initialize the database from an empty file path. The purpose of the test is to ensure that the function handles the empty file path correctly by raising a `FileNotFoundError`.
+
+- **1) Valid Input and Expected Output**  
+
+| **Valid Input**                        | **Expected Output**                                         |
+|----------------------------------------|-------------------------------------------------------------|
+| `filePath = ""`                        | Returns `None` and raises `FileNotFoundError("File path is empty")` |
+
+- **1) Code for the Test Function**
+```python
+def test_initDatabase_with_empty_file_path():
+    result, error = initDatabase("")
+    assert result is None
+    assert isinstance(error, FileNotFoundError)
+    assert str(error) == "File path is empty"
+
+```
+| **Invalid Input**                                      | **Expected Output**                                    |
+|--------------------------------------------------------|--------------------------------------------------------|
+| `filePath = ""`                                        | Raises `FileNotFoundError("File path is empty")`       |
+| `filePath = "/invalid/path/to/file.csv"`               | Raises `FileNotFoundError("No such file or directory")`|
+```python
+def test_initDatabase_with_empty_file_path():
+    result, error = initDatabase("")
+    assert result is None
+    assert isinstance(error, FileNotFoundError)
+    assert str(error) == "File path is empty"
+```
+### Test Case 5: testing `initDatabase` with a nonexistent file
+- **Test Function/Module**
+  - `test_initDatabase_with_nonexistent_file()`
+- **Tested Function/Module**
+  - `initDatabase(filePath)`
+- **Description**
+  - This function attempts to initialize the database with a file path that does not exist. The purpose of the test is to ensure that the function correctly handles the case where the file does not exist by raising a `FileNotFoundError`.
+
+- **1) Valid Input and Expected Output**  
+
+| **Valid Input**                                        | **Expected Output**                                         |
+|--------------------------------------------------------|-------------------------------------------------------------|
+| `filePath = "nonexistent.csv"`                         | Returns `None` and raises `FileNotFoundError("No such file or directory")` |
+
+- **1) Code for the Test Function**
+```python
+def test_initDatabase_with_nonexistent_file():
+    result, error = initDatabase("nonexistent.csv")
+    assert result is None
+    assert isinstance(error, FileNotFoundError)
+    assert str(error) == "No such file or directory"
+```
+| **Invalid Input**                                      | **Expected Output**                                    |
+|--------------------------------------------------------|--------------------------------------------------------|
+| `filePath = "/wrong/path/to/file.csv"`                 | Raises `FileNotFoundError("No such file or directory")`|
+```python
+def test_initDatabase_with_wrong_file_path():
+    result, error = initDatabase("/wrong/path/to/file.csv")
+    assert result is None
+    assert isinstance(error, FileNotFoundError)
+    assert str(error) == "No such file or directory"
+```
+
+### Test Case 6: Test Case for Search Function with Keyword
 - **Test Function/Module**
   - `test_searchDatabase_with_keyword()`
 - **Tested Function/Module**
@@ -156,7 +249,7 @@ def test_searchDatabase_with_invalid_keyword(fetch_real_data):
 
 ```
 
-### Test Case 4: Test case for search with Nutrient Range
+### Test Case 7: Test case for search with Nutrient Range
 - **Test Function/Module**
   - `test_searchDatabase_with_nutrient_range()`
 - **Tested Function/Module**
@@ -198,9 +291,7 @@ def test_searchDatabase_with_invalid_nutrient_range(fetch_real_data):
 
 ```
 
-
-
-### Test Case 5: testing searchDatabase with nutrient level
+### Test Case 8: testing searchDatabase with nutrient level
 - **Test Function/Module**
   - `test_searchDatabase_with_nutrient_level()`
 - **Tested Function/Module**
@@ -226,7 +317,7 @@ def test_searchDatabase_with_nutrient_level(fetch_real_data):
 
 ```
 
-### Test Case 6: testing searchDatabase with invalid `min` and `max` values
+### Test Case 9: testing searchDatabase with invalid `min` and `max` values
 - **Test Function/Module**
   - `test_searchDatabase_with_invalid_minmax()`
 - **Tested Function/Module**
@@ -251,7 +342,7 @@ def test_searchDatabase_with_nutrient_range(fetch_real_data):
     assert result.iloc[0]["food"] == "cream cheese"
 ```
 
-### Test Case 7: testing searchDatabase with all filters applied
+### Test Case 10: testing searchDatabase with all filters applied
 - **Test Function/Module**
   - `test_searchDatabase_with_all_filters()`
 - **Tested Function/Module**
@@ -301,7 +392,7 @@ def test_searchDatabase_with_invalid_all_filters(fetch_real_data):
     df = pd.DataFrame(data)
 ```
 
-### Test Case 8: testing searchDatabase with low protein level
+### Test Case 11: testing searchDatabase with low protein level
 - **Test Function/Module**
   - `test_searchDatabase_with_low_protein()`
 - **Tested Function/Module**
@@ -341,7 +432,7 @@ def test_searchDatabase_with_invalid_low_protein(fetch_real_data):
 ```
 
 
-### Test Case 9: testing `searchDatabase` with mid protein level
+### Test Case 12: testing `searchDatabase` with mid protein level
 - **Test Function/Module**
   - `test_searchDatabase_with_mid_protein()`
 - **Tested Function/Module**
@@ -381,7 +472,7 @@ def test_searchDatabase_with_invalid_mid_protein(fetch_real_data):
 ```
 
 
-### Test Case 10: testing searchDatabase with high protein level
+### Test Case 13: testing searchDatabase with high protein level
 - **Test Function/Module**
   - `test_searchDatabase_with_high_protein()`
 - **Tested Function/Module**
@@ -421,7 +512,7 @@ def test_searchDatabase_with_invalid_high_protein(fetch_real_data):
 ```
 ## 2. **Test Case Details**
 
-### Test Case 11: testing searchDatabase with no filters applied
+### Test Case 14: testing searchDatabase with no filters applied
 - **Test Function/Module**
   - `test_searchDatabase_with_no_filters()`
 - **Tested Function/Module**
@@ -458,7 +549,7 @@ def test_searchDatabase_with_no_filters_invalid(fetch_real_data):
     df = pd.DataFrame(data)
 ```
 
-### Test Case 12: testing `displayResults(results, grid)`
+### Test Case 15: testing `displayResults(results, grid)`
 - **Test Function/Module**
   - `test_displayResults()`
 - **Tested Function/Module**
@@ -516,17 +607,174 @@ def test_displayResults(fetch_real_data, mocker):
     grid.AutoSizeColumns.assert_called_once()
     grid.HideRowLabels.assert_called_once()
 ```
-## 3. **Testing Report Summary**
-Here is a screenshot of unit_test.html showing the results of all the above tests. 
 
-You can use the following command to run the unit tests and generate the unit_test.html report.
+### Test Case 16: testing `addToComparison` with no food selected
+- **Test Function/Module**
+  - `test_addComparisonNone()`
+- **Tested Function/Module**
+  - `addToComparison(selected_food, comparison_list)`
+- **Description**
+  - This function adds a selected food to the comparison list. The purpose of the test is to ensure the function behaves correctly when no food is selected (i.e., when `selected_food` is `None`).
+  
+- **1) Valid Input and Expected Output**  
 
-```commandline
-pytest test_all_functions.py --html=unit_test.html --self-contained-html
+| **Valid Input**                     | **Expected Output**                                        |
+|-------------------------------------|------------------------------------------------------------|
+| `selected_food = None`, `comparison_list = []` | Comparison list remains unchanged (empty)                 |
+
+- **1) Code for the Test Function**
+```python
+def test_addComparisonNone(fetch_real_data):
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+    comparison_list = []
+
+    # Empty selected food
+    selected_food = None
+    currently_selected_food = selected_food
+    addToComparison(currently_selected_food, comparison_list)
+    assert comparison_list == []  # Ensure the comparison list is unchanged
 ```
+- **2) Invalid Input and Expected Output**
+
+| **Invalid Input**                        | **Expected Output**                                         |
+|------------------------------------------|-------------------------------------------------------------|
+| `selected_food = None`, `comparison_list = None`  | Raises `TypeError` or returns unchanged comparison list      |
+| `selected_food = 12345`, `comparison_list = []`   | Does not add the invalid food type, list remains unchanged   |
+
+
+### Test Case 17: testing addToComparison with one food item
+- **Test Function/Module**
+  - `test_addComparisonAddOne()`
+- **Tested Function/Module**
+  - `addToComparison(selected_food, comparison_list)`
+- **Description**
+  - This function adds a selected food to the comparison list. The purpose of the test is to ensure that the function properly adds a single food item to the comparison list.
+
+- **1) Valid Input and Expected Output**  
+
+| **Valid Input**                                          | **Expected Output**                                         |
+|----------------------------------------------------------|-------------------------------------------------------------|
+| `selected_food = df[df["food"] == "cream cheese"]`, `comparison_list = []` | Comparison list contains "cream cheese"                    |
+
+- **1) Code for the Test Function**
+```python
+def test_addComparisonAddOne(fetch_real_data):
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+    comparison_list = []
+
+    selected_food = df[df["food"] == "cream cheese"]
+    currently_selected_food = selected_food
+    addToComparison(currently_selected_food, comparison_list)
+    assert "cream cheese" in comparison_list  # Ensure the food is added
+```
+
+- **2) Invalid Input and Expected Output**
+
+| **Invalid Input**                                      | **Expected Output**                                    |
+|--------------------------------------------------------|--------------------------------------------------------|
+| `selected_food = 12345`, `comparison_list = []`        | Does not add invalid food type, list remains unchanged |
+| `selected_food = None`, `comparison_list = []`         | List remains unchanged                                 |
+
+```python
+def test_addComparisonAddOne_invalid(fetch_real_data):
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+    comparison_list = []
+```
+
+### Test Case 18: testing addToComparison with two different food items
+- **Test Function/Module**
+  - `test_addComparisonAddTwo()`
+- **Tested Function/Module**
+  - `addToComparison(selected_food, comparison_list)`
+- **Description**
+  - This function adds multiple selected food items to the comparison list. The purpose of the test is to ensure the function correctly adds two different food items.
+
+- **1) Valid Input and Expected Output**  
+
+| **Valid Input**                                          | **Expected Output**                                         |
+|----------------------------------------------------------|-------------------------------------------------------------|
+| `selected_food = df[df["food"] == "cream cheese"]`, `comparison_list = []` | Comparison list contains "cream cheese" and "gruyere cheese" |
+
+- **1) Code for the Test Function**
+```python
+def test_addComparisonAddTwo(fetch_real_data):
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+    comparison_list = []
+
+    # add two different foods
+    selected_food = df[df["food"] == "cream cheese"]
+    currently_selected_food = selected_food
+    comparison_list = addToComparison(currently_selected_food, comparison_list)
+
+    selected_food = df[df["food"] == "gruyere cheese"]
+    currently_selected_food = selected_food
+    addToComparison(currently_selected_food, comparison_list)
+    
+    assert "cream cheese" in comparison_list
+    assert "gruyere cheese" in comparison_list  # Ensure both foods are added
+```
+| **Invalid Input**                                      | **Expected Output**                                    |
+|--------------------------------------------------------|--------------------------------------------------------|
+| `selected_food = 12345`, `comparison_list = []`        | Does not add invalid food type, list remains unchanged |
+| `selected_food = None`, `comparison_list = []`         | List remains unchanged                                 |
+
+```python
+def test_addComparisonAddTwo_invalid(fetch_real_data):
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+    comparison_list = []
+```
+### Test Case 19: testing addToComparison with the same food item added twice
+- **Test Function/Module**
+  - `test_addComparisonAddSame()`
+- **Tested Function/Module**
+  - `addToComparison(selected_food, comparison_list)`
+- **Description**
+  - This function adds the same selected food item multiple times to the comparison list. The purpose of the test is to ensure that the function does not allow duplicate entries.
+
+- **1) Valid Input and Expected Output**  
+
+| **Valid Input**                                          | **Expected Output**                                         |
+|----------------------------------------------------------|-------------------------------------------------------------|
+| `selected_food = df[df["food"] == "cream cheese"]`, `comparison_list = []` | Comparison list contains "cream cheese" only once |
+
+- **1) Code for the Test Function**
+```python
+def test_addComparisonAddSame(fetch_real_data):
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+    comparison_list = []
+
+    # Add two of the same food
+    selected_food = df[df["food"] == "cream cheese"]
+    currently_selected_food = selected_food
+    comparison_list = addToComparison(currently_selected_food, comparison_list)
+
+    selected_food = df[df["food"] == "cream cheese"]
+    currently_selected_food = selected_food
+    addToComparison(currently_selected_food, comparison_list)
+
+    assert comparison_list.count("cream cheese") == 1  # Ensure no duplicates
+```
+| **Invalid Input**                                      | **Expected Output**                                    |
+|--------------------------------------------------------|--------------------------------------------------------|
+| `selected_food = 12345`, `comparison_list = []`        | Does not add invalid food type, list remains unchanged |
+| `selected_food = None`, `comparison_list = []`         | List remains unchanged                                 |
+
+```python
+def test_addComparisonAddSame_invalid(fetch_real_data):
+    data = fetch_real_data
+    df = pd.DataFrame(data)
+    comparison_list = []
+```
+
+
+### 3. **Testing Report Summary**
+Here is a screenshot of unit_test.html showing the results of all the above tests.
 [Unit Test Report](file:///Users/cameroncassar/2810ICT-milestone-2/src/unit_test.html)
 
-
-Note: test_all_functions.py should contain all the test functions designed to test the self-defined functions related 
-to the five required features.
-![unit test summary]![Unit_test_report.png](Executive%20summary%20screenshots%2FUnit_test_report.png)
+[Unit Test Summary]![Unit_test_report.png](Executive%20summary%20screenshots%2FUnit_test_report.png)
