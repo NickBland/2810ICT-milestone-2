@@ -2,18 +2,9 @@
 
 Please provide your GitHub repository link.
 
-### GitHub Repository URL: <https://github.com/NickBland/2810ICT-milestone-2.git>
+## GitHub Repository URL: <https://github.com/NickBland/2810ICT-milestone-2.git>
 
 ---
-
-The testing report should focus solely on <span style="color:red"> testing all the self-defined functions related to
-the five required features.</span> There is no need to test the GUI components.
-Therefore, it is essential to decouple your code and separate the logic from the GUI-related code.
-
-## 1. **Test Summary**
-
-list all tested functions related to the five required features and the corresponding test functions designed to test
-those functions, for example:
 
 ## 1. **Test Summary**
 
@@ -33,7 +24,7 @@ those functions, for example:
 |                                  | `test_searchDatabase_with_mid_protein()`          |
 |                                  | `test_searchDatabase_with_high_protein()`         |
 |                                  | `test_searchDatabase_with_no_filters()`           |
-| `addToComparison(selected_food, comparison_list)` | `test_addComparisonNone()`|
+| `addToComparison(selected_food, comparison_list)` | `test_addComparisonNone()`       |
 |                                  | `test_addComparisonAddOne()`                      |
 |                                  | `test_addComparisonAddTwo()`                      |
 |                                  | `test_addComparisonAddSame()`                     |
