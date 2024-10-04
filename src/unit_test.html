@@ -429,10 +429,10 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
 }
 </script>
     <h1>unit_test.html</h1>
-    <p>Report generated on 03-Oct-2024 at 13:41:56 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.1.1</p>
+    <p>Report generated on 03-Oct-2024 at 13:59:52 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.1.1</p>
     <h2>Summary</h2>
-    <p>15 tests ran in 0.73 seconds. </p>
-    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="passed">15 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="failed">0 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
+    <p>19 tests ran in 0.63 seconds. </p>
+    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="passed">19 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="failed">0 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
     <h2>Results</h2>
     <table id="results-table">
       <thead id="results-table-head">
@@ -516,7 +516,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_database.py::test_searchDatabase_with_nutrient_range</td>
-          <td class="col-duration">0.02</td>
+          <td class="col-duration">0.01</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -713,6 +713,70 @@ filters: 3, type: &lt;class &#x27;int&#x27;&gt;
 2394                   oyster mushroom              5  ...  0.048              1.804
 
 [2395 rows x 35 columns]
+<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_database.py::test_addComparisonNone</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_database.py::test_addComparisonAddOne</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_database.py::test_addComparisonAddTwo</td>
+          <td class="col-duration">0.02</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>&lt;class &#x27;pandas.core.frame.DataFrame&#x27;&gt;
+           food  Caloric Value  Fat  ...  Selenium   Zinc  Nutrition Density
+0  cream cheese             51  5.0  ...      19.1  0.039               7.07
+
+[1 rows x 35 columns]
+&lt;class &#x27;list&#x27;&gt;
+[]
+&lt;class &#x27;pandas.core.frame.DataFrame&#x27;&gt;
+             food  Caloric Value  Fat  ...  Selenium  Zinc  Nutrition Density
+6  gruyere cheese            116  9.1  ...     0.079   1.1            300.694
+
+[1 rows x 35 columns]
+&lt;class &#x27;list&#x27;&gt;
+[&#x27;cream cheese&#x27;]
+<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_database.py::test_addComparisonAddSame</td>
+          <td class="col-duration">0.02</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>&lt;class &#x27;pandas.core.frame.DataFrame&#x27;&gt;
+           food  Caloric Value  Fat  ...  Selenium   Zinc  Nutrition Density
+0  cream cheese             51  5.0  ...      19.1  0.039               7.07
+
+[1 rows x 35 columns]
+&lt;class &#x27;list&#x27;&gt;
+[]
+&lt;class &#x27;pandas.core.frame.DataFrame&#x27;&gt;
+           food  Caloric Value  Fat  ...  Selenium   Zinc  Nutrition Density
+0  cream cheese             51  5.0  ...      19.1  0.039               7.07
+
+[1 rows x 35 columns]
+&lt;class &#x27;list&#x27;&gt;
+[&#x27;cream cheese&#x27;]
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
