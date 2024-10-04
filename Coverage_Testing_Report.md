@@ -1,23 +1,32 @@
 # Coverage Testing Report
 
-Please provide your GitHub repository link.
-### GitHub Repository URL: https://github.com/XXXX/XXXXX.git
+## GitHub Repository URL: <https://github.com/NickBland/2810ICT-milestone-2.git>
 
 ---
 
-The testing report should focus solely on <span style="color:red"> testing all the self-defined functions related to 
-the five required features.</span> There is no need to test the GUI components. Therefore, it is essential to decouple your code and separate the logic from the GUI-related code.
+## 1. Test Summary
 
-You should perform statement coverage testing and branch coverage testing. For each type, provide a description and an analysis explaining how you evaluated the coverage.
-
-## 1. **Test Summary**
-list all tested functions related to the five required features, for example:
-
-| **Tested Functions** |
-|----------------------|
-| `add(x1,x2)`         | 
-| `divide(x1,x2)`      |
-| `...`                |
+| **Tested Functions**             | **Test Functions**                                |
+|----------------------------------|---------------------------------------------------|
+| `initDatabase(filePath)`         | `test_initDatabase_with_valid_csv()`              |
+|                                  | `test_initDatabase_with_empty_csv()`              |
+|                                  | `test_initDatabase_with_invalid_file_path()`      |
+|                                  | `test_initDatabase_with_empty_file_path()`        |
+|                                  | `test_initDatabase_with_nonexistent_file()`       |
+| `searchDatabase(filters, db)`    | `test_searchDatabase_with_keyword()`              |
+|                                  | `test_searchDatabase_with_nutrient_range()`       |
+|                                  | `test_searchDatabase_with_nutrient_level()`       |
+|                                  | `test_searchDatabase_with_invalid_minmax()`       |
+|                                  | `test_searchDatabase_with_all_filters()`          |
+|                                  | `test_searchDatabase_with_low_protein()`          |
+|                                  | `test_searchDatabase_with_mid_protein()`          |
+|                                  | `test_searchDatabase_with_high_protein()`         |
+|                                  | `test_searchDatabase_with_no_filters()`           |
+| `addToComparison(selected_food, comparison_list)` | `test_addComparisonNone()`       |
+|                                  | `test_addComparisonAddOne()`                      |
+|                                  | `test_addComparisonAddTwo()`                      |
+|                                  | `test_addComparisonAddSame()`                     |
+| `displayResults(results, grid)`  | `test_displayResults()`                           |
 
 ---
 
@@ -25,34 +34,30 @@ list all tested functions related to the five required features, for example:
 
 ### 2.1 Description
 
-Explain how you designed the test cases (i.e., test_all_functions.py) to reach 100% statement coverage.
+For each of the functions that were required to be tested, the first test case was usually designed to test the function with valid inputs. This is because the function should be able to handle valid inputs correctly. From there, with the coverage tool, statements were analysed for what was 'missed' by this first test. Normally, at this point, it would be tests that should fail (i.e. invalid inputs). So, a new test that should fail was made, and then re-run with the coverage tool. This process was repeated until all statements were covered.
 
 ### 2.2 Testing Results
-You can use the following command to run the statement coverage test and generate the report in the terminal. Afterward, include a screenshot of the report. 
 
-You must provide the test_all_functions.py file, which contains all test functions, otherwise pytest will not be able to execute the tests.
+The following command was run to check the statement coverage of the tests. A screenshot of the report is included below.
 
 ```commandline
-pytest --cov=all_functions --cov-report=term
+pytest --cov=database --cov-report=term
 ```
-Note: In the command above, the file/module `all_functions` does not include the .py extension. all_functions.py should contain all the tested functions related to the five required features.
 
-![statement_coverage](./statement_coverage.png)
+![statement_coverage](./Executive%20summary%20screenshots/Coverage_test_report.png)
 
 ## 3. **Branch Coverage Test**
 
 ### 3.1 Description
 
-Explain how you designed the test cases (i.e., test_all_functions.py) to reach 100% branch coverage.
+The process for branch coverage was more-or-less the same. For each test case created, branch coverage was run to check if there were any branch statements that had not been covered by the test. If there were, a new test was created to cover that branch. This process was repeated until all branches were covered.
 
 ### 3.2 Testing Results
-You can use the following command to run the branch coverage test and generate the report in the terminal. Afterward, include a screenshot of the report. 
 
-You must provide the test_all_functions.py file, which contains all test functions, otherwise pytest will not be able to execute the tests.
+The following command was run to check the branch coverage of the tests. A screenshot of the report is included below.
 
 ```commandline
-pytest --cov=all_functions --cov-branch --cov-report=term
+pytest --cov=database --cov-branch --cov-report=term
 ```
-Note: In the command above, the file/module `all_functions` does not include the .py extension. all_functions.py should contain all the tested functions related to the five required features.
 
-![statement_coverage](./branch_coverage.png)
+![statement_coverage](./Executive%20summary%20screenshots/Branch_test_report.png)
